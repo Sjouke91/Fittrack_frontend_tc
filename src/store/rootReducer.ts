@@ -1,10 +1,12 @@
 // src/store/reducer.js
 import { combineReducers } from "redux";
-// import someFeatureReducer from "./someFeature/reducer";
+import appState from "./appState/reducer";
+import user from "./user/reducer";
 
 const reducer = combineReducers({
-  // someFeature: someFeatureReducer
-  // etc...
+  appState,
+  user,
 });
 
 export default reducer;
+export type RootState = ReturnType<typeof reducer>;
