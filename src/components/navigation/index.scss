@@ -1,0 +1,16 @@
+#navBar {
+  .logo {
+    height: 3.5vh;
+    margin: 0 10px;
+  }
+  .userLinks {
+    display: flex;
+
+    .link {
+      margin: 0 15px;
+    }
+    @media (max-width: 991px) {
+      flex-direction: column;
+    }
+  }
+}
