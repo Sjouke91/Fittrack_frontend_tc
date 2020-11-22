@@ -44,3 +44,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+git remote -v origin git@github.com:Sjouke91/Fittrack_frontend_tc.git
+
+> origin git@github.com:Sjouke91/To-do-list-tsx-app.git (fetch)
+> origin git@github.com:Sjouke91/Fittrack_frontend_tc.git (push)
+
+git remote set-url origin git@github.com:Sjouke91/Fittrack_frontend_tc.git
