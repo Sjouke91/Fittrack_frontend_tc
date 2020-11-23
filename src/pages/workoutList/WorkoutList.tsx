@@ -19,7 +19,7 @@ export default function Fitness() {
   return (
     <div className="workoutPage">
       <div className="header">
-        <h2>Previous workouts</h2>
+        <h2>Previous workouts of user</h2>
       </div>
       <div className="workoutList">
         {workouts.map((w) => {
