@@ -3,14 +3,24 @@ export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 
 export interface UserWithToken {
+  id: number;
+  token: string;
   name: string;
   email: string;
-  token: string;
+  gender: string | null;
+  age: number | null;
+  heightInCm: number | null;
+  weightInKg: number | null;
 }
 
 export interface UserWithoutToken {
+  id: number;
   name: string;
   email: string;
+  gender: string | null;
+  age: number | null;
+  heightInCm: number | null;
+  weightInKg: number | null;
 }
 
 interface LoginSuccesAction {
@@ -33,9 +43,5 @@ export type UserActionTypes =
   | logOutAction;
 
 export interface UserState {
-  user: {
-    token: string;
-    name: string;
-    email: string;
-  };
+  user: UserWithToken;
 }

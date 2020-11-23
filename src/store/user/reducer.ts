@@ -1,10 +1,11 @@
-import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
+import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./types";
 import { UserActionTypes } from "./types";
 
 const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
+  id: null,
 };
 
 // eslint-disable-next-line
