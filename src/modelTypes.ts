@@ -34,3 +34,15 @@ export type Workout = {
 export type MuscleGroup = {
   name: string;
 };
+
+export type ExerciseSubmit = {
+  id: number | null;
+  kg: number | null;
+  sets: number | null;
+  reps: number | null;
+  RPE: number | null;
+};
+
+export interface ParamTypes {
+  id: string;
+}
