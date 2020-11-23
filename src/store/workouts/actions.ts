@@ -5,12 +5,7 @@ import { selectUser } from "../user/selectors";
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
-import {
-  WorkoutActionTypes,
-  Workout,
-  GET_USERS_WORKOUTS,
-  WorkoutsState,
-} from "./types";
+import { WorkoutActionTypes, Workout, GET_USERS_WORKOUTS } from "./types";
 
 const workoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
   return { type: GET_USERS_WORKOUTS, payload: workoutArray };

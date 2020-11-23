@@ -1,8 +1,15 @@
 export const GET_USERS_WORKOUTS = "GET_USERS_WORKOUTS";
 
 export interface Workout {
+  id: number;
   name: string;
-  intesity: string;
+  intensity: string;
+}
+
+export interface WorkoutWithUser {
+  userId: number;
+  workoutId: number;
+  workout: Workout;
 }
 
 interface workoutToState {
@@ -13,5 +20,5 @@ interface workoutToState {
 export type WorkoutActionTypes = workoutToState;
 
 export interface WorkoutsState {
-  all: Workout[];
+  workouts: { all: WorkoutWithUser[] };
 }

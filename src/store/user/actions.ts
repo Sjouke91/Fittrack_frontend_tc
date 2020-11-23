@@ -177,7 +177,7 @@ export const signUp = (
 
       dispatch(loginSuccess(response.data));
       dispatch(
-        showMessageWithTimeout("success", true, "account created", 3000)
+        showMessageWithTimeout("success", true, "account created", 2000)
       );
       dispatch(appDoneLoading());
     } catch (error) {
