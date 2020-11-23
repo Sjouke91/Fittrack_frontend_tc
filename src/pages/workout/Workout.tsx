@@ -7,7 +7,7 @@ import { getExercises, submitExercise } from "../../store/exercises/actions";
 import { importExercises } from "../../store/exercises/selectors";
 import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
-import { type } from "os";
+
 // import { selectStats } from "../../store/stats/selectors";
 // import Timer from "../../components/Timer/Timer";
 // import ExerciseStats from "../../components/ExerciseStats/ExerciseStats";
@@ -17,7 +17,7 @@ export default function Workout() {
   const workoutId = parseInt(id);
   const dispatch = useDispatch();
   const allExercises = useSelector(importExercises);
-  const [showStats, setShowStats] = useState(false);
+  // const [showStats, setShowStats] = useState(false);
   const [finishExercise, setFinishExercise] = useState<ExerciseSubmit>({
     id: null,
     reps: null,
