@@ -5,9 +5,9 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
-  id: null,
 };
 
+// eslint-disable-next-line
 export default (state = initialState, action: UserActionTypes) => {
   switch (action.type) {
     case LOGIN_SUCCESS:

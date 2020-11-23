@@ -6,13 +6,11 @@ export interface UserWithToken {
   name: string;
   email: string;
   token: string;
-  id: number;
 }
 
 export interface UserWithoutToken {
   name: string;
   email: string;
-  id: number;
 }
 
 interface LoginSuccesAction {
