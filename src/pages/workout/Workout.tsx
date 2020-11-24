@@ -68,7 +68,7 @@ export default function Workout() {
                         reps: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.reps}
+                    value={finishExercise.reps || ""}
                     required
                   ></input>
                   <input
@@ -80,7 +80,7 @@ export default function Workout() {
                         sets: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.sets}
+                    value={finishExercise.sets || ""}
                   ></input>
                   <input
                     type="number"
@@ -91,7 +91,7 @@ export default function Workout() {
                         kg: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.kg}
+                    value={finishExercise.kg || ""}
                     required
                   ></input>
                   <input
@@ -103,7 +103,7 @@ export default function Workout() {
                         RPE: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.RPE}
+                    value={finishExercise.RPE || ""}
                     required
                   ></input>
                 </div>
