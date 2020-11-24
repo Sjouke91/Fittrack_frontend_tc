@@ -5,25 +5,26 @@ import { selectUser } from "../user/selectors";
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
-import { WorkoutActionTypes, Workout, GET_USERS_WORKOUTS } from "./types";
+import { MuscleGroup, MuscleGroupActionTypes, GET_MUSCLEGROUPS } from "./types";
 
-const workoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
-  return { type: GET_USERS_WORKOUTS, payload: workoutArray };
+const FetchMuscleGroupSucces = (
+  muscleGroupArray: MuscleGroup[]
+): MuscleGroupActionTypes => {
+  return { type: GET_MUSCLEGROUPS, payload: muscleGroupArray };
 };
 
-export const getUsersWorkouts = (): ThunkAction<
+export const getMuscleGroups = (): ThunkAction<
   void,
   RootState,
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
   dispatch(appLoading);
-  const user = selectUser(getState());
   try {
-    const res = await axios.get(`${apiUrl}/workouts/${user.id}`);
+    const res = await axios.get(`${apiUrl}/muscleGroups`);
+    const muscleGroupArray: MuscleGroup[] = res.data;
     dispatch(appDoneLoading);
-    const workoutArray: Workout[] = res.data;
-    dispatch(workoutToState(workoutArray));
+    dispatch(FetchMuscleGroupSucces(muscleGroupArray));
   } catch (e) {
     console.log("ERROR:", e.message);
   }

@@ -4,12 +4,15 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllExercises } from "../../store/exercises/actions";
 import { importAllExercises } from "../../store/exercises/selectors";
+import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
 import TextInput from "react-bootstrap/Button";
+import { getMuscleGroups } from "../../store/muscleGroups/actions";
 
 export default function Workout() {
   const allExercises = useSelector(importAllExercises);
+  const allMuscleGroups = useSelector(selectMuscleGroups);
   const dispatch = useDispatch();
   const [offSet, set_offSet] = useState(0);
 
@@ -17,7 +20,9 @@ export default function Workout() {
     dispatch(getAllExercises(offSet));
   }, [dispatch]);
 
-  console.log("this is all ex", allExercises);
+  useEffect(() => {
+    dispatch(getMuscleGroups());
+  }, [dispatch]);
 
   const onClickDispatch = (e: MouseEvent) => {
     console.log("click", offSet);
@@ -40,8 +45,14 @@ export default function Workout() {
         <Form.Group controlId="formSearchText">
           <Form.Label>Search by name</Form.Label>
           <Form.Control type="text" placeholder="Exercise name" />
-          <Form.Label>Search by muscle group</Form.Label>
-          <Form.Control type="text" placeholder="Muscle group" />
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Search by muscle group</Form.Label>
+            <Form.Control as="select">
+              {allMuscleGroups.map((mg) => {
+                return <option key={mg.id}>{mg.name}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
         </Form.Group>
         <Form.Group>
           <Form.Label>Add exercises:</Form.Label>
