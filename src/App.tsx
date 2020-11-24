@@ -31,8 +31,8 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/workouts" component={WorkoutList} />
-        <Route path="/workouts/:workoutId" component={Workout} />
+        <Route exact path="/workouts" component={WorkoutList} />
+        <Route path="/workouts/:id" component={Workout} />
         <Route path="/creator" component={Creator} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
