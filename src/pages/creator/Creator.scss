@@ -1,11 +1,34 @@
-.header {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(224, 224, 224);
-  align-items: center;
-  height: 10vh;
-  h2 {
-    font-weight: 200;
-    font-size: 28px;
+.creatorPage {
+  .header {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(224, 224, 224);
+    align-items: center;
+    height: 10vh;
+    h2 {
+      font-weight: 200;
+      font-size: 28px;
+    }
+  }
+  .exerciseList {
+    border: 1px solid rgb(29, 29, 29);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    justify-content: center;
+    .exerciseCard {
+      width: 180px;
+      height: 100px;
+      margin: 5px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
+      border: 1px solid rgb(29, 29, 29);
+      border-radius: 5px;
+      align-items: center;
+
+      p {
+        margin: 0;
+      }
+    }
   }
 }

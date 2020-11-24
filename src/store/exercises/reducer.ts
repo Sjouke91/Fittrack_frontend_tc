@@ -1,9 +1,6 @@
 import {
   GET_WORKOUT_EXERCISES,
   ExerciseActionTypes,
-  ExerciseState,
-  ExercisesWithWorkout,
-  Exercise,
   GET_ALL_EXERCISES,
 } from "./types";
 
@@ -12,6 +9,7 @@ const initialState = {
   all: [],
 };
 
+// eslint-disable-next-line
 export default (state = initialState, action: ExerciseActionTypes) => {
   switch (action.type) {
     case GET_WORKOUT_EXERCISES:

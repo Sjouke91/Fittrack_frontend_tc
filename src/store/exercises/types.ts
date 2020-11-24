@@ -2,11 +2,16 @@ export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
 export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
 
-export interface Exercise {
+export type Exercise = {
   id: number;
   name: string;
-  muscleId: number;
-}
+  muscleGroup: MuscleGroup;
+};
+
+export type MuscleGroup = {
+  id: number;
+  name: string;
+};
 
 export type ExerciseSubmit = {
   workoutId: number;

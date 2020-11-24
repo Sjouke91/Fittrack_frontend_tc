@@ -27,7 +27,7 @@ export default function Workout() {
   };
 
   return (
-    <div className="exercisePage">
+    <div className="creatorPage">
       <div className="header">
         <h2>Create your workout!</h2>
       </div>
@@ -46,17 +46,17 @@ export default function Workout() {
         <Form.Group>
           <Form.Label>Add exercises:</Form.Label>
         </Form.Group>
-        {allExercises.map((e, i) => {
-          return (
-            <div
-              key={e.id}
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <p>{i + 1}</p>
-              <p>{e.name}</p>
-            </div>
-          );
-        })}
+        <div className="exerciseList">
+          {allExercises.map((e, i) => {
+            return (
+              <div className="exerciseCard" key={i}>
+                <p>{}</p>
+                <p>{`${e.id}.  ${e.name}`}</p>
+                <p>{e.muscleGroup.name}</p>
+              </div>
+            );
+          })}
+        </div>
         <button onClick={(e) => onClickDispatch(e)}>Get more exercises</button>
       </Form>
     </div>
