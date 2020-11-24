@@ -1,9 +1,11 @@
+export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
 export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
 
 export interface Exercise {
   id: number;
   name: string;
+  muscleId: number;
 }
 
 export type ExerciseSubmit = {
@@ -21,6 +23,11 @@ export interface ExercisesWithWorkout {
   exercise: Exercise;
 }
 
+interface getAllExercisesAction {
+  type: typeof GET_ALL_EXERCISES;
+  payload: Exercise[];
+}
+
 interface getWorkoutExercisesAction {
   type: typeof GET_WORKOUT_EXERCISES;
   payload: ExercisesWithWorkout[];
@@ -32,9 +39,10 @@ interface submitExerciseAction {
 }
 
 export type ExerciseActionTypes =
+  | getAllExercisesAction
   | getWorkoutExercisesAction
   | submitExerciseAction;
 
 export interface ExerciseState {
-  exercises: { all: ExercisesWithWorkout[] };
+  exercises: { workout: ExercisesWithWorkout[]; all: Exercise[] };
 }

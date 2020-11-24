@@ -9,6 +9,7 @@ import {
 import { selectToken } from "../user/selectors";
 import {
   GET_WORKOUT_EXERCISES,
+  GET_ALL_EXERCISES,
   ExerciseActionTypes,
   ExerciseState,
   ExercisesWithWorkout,
@@ -19,7 +20,26 @@ import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
 
-export const getExercises = (
+export const getAllExercises = (
+  offset: number
+): ThunkAction<void, RootState, unknown, Action<string>> => async (
+  dispatch,
+  getState
+) => {
+  dispatch(appLoading);
+  try {
+    const res = await axios.get(
+      `${apiUrl}/exercises?offset=${offset}&limit=50`
+    );
+    const exercises = res.data;
+    dispatch(allExerciseSucces(exercises));
+    dispatch(appDoneLoading);
+  } catch (e) {
+    console.log("ERROR:", e.message);
+  }
+};
+
+export const getWorkoutExercises = (
   workoutId: number
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch,
@@ -29,7 +49,7 @@ export const getExercises = (
   try {
     const res = await axios.get(`${apiUrl}/exercises/${workoutId}`);
     const exercises = res.data;
-    dispatch(exercise(exercises));
+    dispatch(workoutExerciseSucces(exercises));
     dispatch(appDoneLoading);
   } catch (e) {
     console.log("ERROR:", e.message);
@@ -76,6 +96,12 @@ export const submitExercise = ({
   }
 };
 
-const exercise = (exercises: ExerciseActionTypes) => {
+const workoutExerciseSucces = (
+  exercises: ExercisesWithWorkout[]
+): ExerciseActionTypes => {
   return { type: GET_WORKOUT_EXERCISES, payload: exercises };
+};
+
+const allExerciseSucces = (exercises: Exercise[]): ExerciseActionTypes => {
+  return { type: GET_ALL_EXERCISES, payload: exercises };
 };

@@ -2,8 +2,11 @@ import "./Workout.scss";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getExercises, submitExercise } from "../../store/exercises/actions";
-import { importExercises } from "../../store/exercises/selectors";
+import {
+  getWorkoutExercises,
+  submitExercise,
+} from "../../store/exercises/actions";
+import { importWorkoutExercises } from "../../store/exercises/selectors";
 import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
 
@@ -11,7 +14,7 @@ export default function Workout() {
   const { id } = useParams<ParamTypes>();
   const workoutId = parseInt(id);
   const dispatch = useDispatch();
-  const allExercises = useSelector(importExercises);
+  const allExercises = useSelector(importWorkoutExercises);
   const [finishExercise, setFinishExercise] = useState<ExerciseSubmit>({
     workoutId: workoutId,
     id: null,
@@ -22,7 +25,7 @@ export default function Workout() {
   });
 
   useEffect(() => {
-    dispatch(getExercises(workoutId));
+    dispatch(getWorkoutExercises(workoutId));
   }, [dispatch, workoutId]);
 
   const onClickSubmit = (id: number) => {

@@ -7,19 +7,28 @@ import {
   showMessageWithTimeout,
   setMessage,
 } from "../appState/actions";
-import { UserActionTypes, LOGIN_SUCCESS, LOG_OUT, TOKEN_STILL_VALID } from "./types";
+import {
+  UserActionTypes,
+  LOGIN_SUCCESS,
+  LOG_OUT,
+  TOKEN_STILL_VALID,
+  UserWithToken,
+  UserWithoutToken,
+} from "./types";
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
 
-const loginSuccess = (userWithToken: UserActionTypes) => {
+const loginSuccess = (userWithToken: UserWithToken): UserActionTypes => {
   return {
     type: LOGIN_SUCCESS,
     payload: userWithToken,
   };
 };
 
-const tokenStillValid = (userWithoutToken: UserActionTypes) => ({
+const tokenStillValid = (
+  userWithoutToken: UserWithoutToken
+): UserActionTypes => ({
   type: TOKEN_STILL_VALID,
   payload: userWithoutToken,
 });
