@@ -3,22 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getExercises, submitExercise } from "../../store/exercises/actions";
-// import { getStats, resetExerciseStats } from "../../store/stats/actions";
 import { importExercises } from "../../store/exercises/selectors";
 import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
-
-// import { selectStats } from "../../store/stats/selectors";
-// import Timer from "../../components/Timer/Timer";
-// import ExerciseStats from "../../components/ExerciseStats/ExerciseStats";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
   const workoutId = parseInt(id);
   const dispatch = useDispatch();
   const allExercises = useSelector(importExercises);
-  // const [showStats, setShowStats] = useState(false);
   const [finishExercise, setFinishExercise] = useState<ExerciseSubmit>({
+    workoutId: workoutId,
     id: null,
     reps: null,
     sets: null,
@@ -31,9 +26,11 @@ export default function Workout() {
   }, [dispatch, workoutId]);
 
   const onClickSubmit = (id: number) => {
-    setFinishExercise({ ...finishExercise, id });
+    console.log("clicked", id);
+    setFinishExercise({ ...finishExercise, id, workoutId });
     dispatch(submitExercise(finishExercise));
     setFinishExercise({
+      workoutId: workoutId,
       id: null,
       reps: null,
       sets: null,
@@ -42,11 +39,7 @@ export default function Workout() {
     });
   };
 
-  console.log("this is all", allExercises);
-  // const onClickLog = (id) => {
-  //   showStats ? dispatch(resetExerciseStats()) : dispatch(getStats(id));
-  //   setShowStats(!showStats);
-  // };
+  console.log(finishExercise);
 
   return (
     <div className="exercisePage">
@@ -73,6 +66,7 @@ export default function Workout() {
                       });
                     }}
                     value={finishExercise.reps}
+                    required
                   ></input>
                   <input
                     type="number"
@@ -95,6 +89,7 @@ export default function Workout() {
                       });
                     }}
                     value={finishExercise.kg}
+                    required
                   ></input>
                   <input
                     type="number"
@@ -106,23 +101,10 @@ export default function Workout() {
                       });
                     }}
                     value={finishExercise.RPE}
+                    required
                   ></input>
                 </div>
-                {/* {allStats.map((s, i) => {
-                  return (
-                    <div key={i} className="allStats">
-                      <p>{s.date}</p>
-                      <p>{`reps: ${s.reps}`}</p>
-                      <p>{`sets: ${s.sets}`}</p>
-                      <p>{`kg: ${s.kg}`}</p>
-                      <p>{`rpe: ${s.RPE}`}</p>
-                    </div>
-                  );
-                })} */}
                 <div className="buttons">
-                  {/* <Button id="button" onClick={() => onClickLog(e.id)}>
-                    Stats
-                  </Button> */}
                   <Button id="button" onClick={() => onClickSubmit(e.id)}>
                     Finish
                   </Button>
@@ -132,7 +114,6 @@ export default function Workout() {
           })}
         </div>
       </div>
-      <div className="timerDiv">{/* <Timer /> */}</div>
     </div>
   );
 }

@@ -1,6 +1,11 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
-import { appLoading, appDoneLoading } from "../appState/actions";
+import {
+  appLoading,
+  appDoneLoading,
+  showMessageWithTimeout,
+  setMessage,
+} from "../appState/actions";
 import { selectToken } from "../user/selectors";
 import {
   GET_WORKOUT_EXERCISES,
@@ -32,6 +37,7 @@ export const getExercises = (
 };
 
 export const submitExercise = ({
+  workoutId,
   id,
   reps,
   sets,
@@ -43,12 +49,14 @@ export const submitExercise = ({
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
+  console.log("got run", id);
   const token = selectToken(getState());
   dispatch(appLoading);
   try {
     await axios.post(
       `${apiUrl}/exercises/${id}`,
       {
+        workoutId,
         reps,
         sets,
         kg,
@@ -59,8 +67,12 @@ export const submitExercise = ({
       }
     );
     dispatch(appDoneLoading);
+    dispatch(showMessageWithTimeout("success", true, "exercise logged", 2000));
   } catch (e) {
-    console.log(e.message);
+    console.log(e);
+    dispatch(
+      showMessageWithTimeout("danger", true, e.response.data.message, 2000)
+    );
   }
 };
 
