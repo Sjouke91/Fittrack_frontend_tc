@@ -10,6 +10,7 @@ import { selectToken } from "../user/selectors";
 import {
   GET_WORKOUT_EXERCISES,
   GET_ALL_EXERCISES,
+  GET_EXERCISES_BY_SEARCH,
   ExerciseActionTypes,
   ExerciseState,
   ExercisesWithWorkout,
@@ -33,6 +34,25 @@ export const getAllExercises = (
     );
     const exercises = res.data;
     dispatch(allExerciseSucces(exercises));
+    dispatch(appDoneLoading);
+  } catch (e) {
+    console.log("ERROR:", e.message);
+  }
+};
+
+export const getExercisesBySearch = (
+  muscleGroupId: number
+): ThunkAction<void, RootState, unknown, Action<string>> => async (
+  dispatch,
+  getState
+) => {
+  dispatch(appLoading);
+  try {
+    const res = await axios.get(
+      `${apiUrl}/exercises/search?muscleGroupId=${muscleGroupId}`
+    );
+    const exercises = res.data;
+    dispatch(exerciseSearchSucces(exercises));
     dispatch(appDoneLoading);
   } catch (e) {
     console.log("ERROR:", e.message);
@@ -104,4 +124,8 @@ const workoutExerciseSucces = (
 
 const allExerciseSucces = (exercises: Exercise[]): ExerciseActionTypes => {
   return { type: GET_ALL_EXERCISES, payload: exercises };
+};
+
+const exerciseSearchSucces = (exercises: Exercise[]): ExerciseActionTypes => {
+  return { type: GET_EXERCISES_BY_SEARCH, payload: exercises };
 };

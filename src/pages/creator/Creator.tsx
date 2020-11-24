@@ -2,11 +2,19 @@ import "./Creator.scss";
 import React, { useEffect, useState, MouseEvent } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllExercises } from "../../store/exercises/actions";
+import {
+  getAllExercises,
+  getExercisesBySearch,
+} from "../../store/exercises/actions";
 import { importAllExercises } from "../../store/exercises/selectors";
 import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
-import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
+import {
+  ExerciseSubmit,
+  ParamTypes,
+  Search,
+  MuscleGroup,
+} from "../../modelTypes";
 import TextInput from "react-bootstrap/Button";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
 
@@ -25,10 +33,16 @@ export default function Workout() {
   }, [dispatch]);
 
   const onClickDispatch = (e: MouseEvent) => {
-    console.log("click", offSet);
     e.preventDefault();
     set_offSet(offSet + 50);
     dispatch(getAllExercises(offSet));
+  };
+
+  const onSelectDispatch = (e: string) => {
+    const selectedMuscleGroup = allMuscleGroups.find((mg) => mg.name === e);
+    if (selectedMuscleGroup) {
+      dispatch(getExercisesBySearch(selectedMuscleGroup.id));
+    }
   };
 
   return (
@@ -47,7 +61,13 @@ export default function Workout() {
           <Form.Control type="text" placeholder="Exercise name" />
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Search by muscle group</Form.Label>
-            <Form.Control as="select">
+            <Form.Control
+              as="select"
+              onChange={(e) => {
+                onSelectDispatch(e.target.value);
+              }}
+            >
+              <option>Pick a muscle group...</option>
               {allMuscleGroups.map((mg) => {
                 return <option key={mg.id}>{mg.name}</option>;
               })}
