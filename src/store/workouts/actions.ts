@@ -52,8 +52,6 @@ export const createWorkout = (
       }
     );
     dispatch(appDoneLoading);
-    const workoutArray: Workout[] = res.data;
-    dispatch(workoutToState(workoutArray));
     dispatch(showMessageWithTimeout("success", false, "Workout added!", 3000));
   } catch (e) {
     console.log("ERROR:", e.message);

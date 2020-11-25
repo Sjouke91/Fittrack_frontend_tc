@@ -38,7 +38,7 @@ export default function Fitness() {
       </div>
       <div className="addWorkout">
         <Link to="/creator">
-          <Button id="button">+</Button>
+          <Button id="button">Create workout</Button>
         </Link>
       </div>
     </div>
