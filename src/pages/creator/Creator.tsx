@@ -17,6 +17,7 @@ import {
 } from "../../modelTypes";
 import TextInput from "react-bootstrap/Button";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
+import { createWorkout } from "../../store/workouts/actions";
 
 export default function Workout() {
   const allExercises = useSelector(importAllExercises);
@@ -42,21 +43,22 @@ export default function Workout() {
     e.preventDefault();
 
     if (searchMuscleGroup === "Pick a muscle group...") {
-      console.log("got run");
       set_searchMuscleGroup("");
     }
-    console.log(searchMuscleGroup);
+
     if (searchMuscleGroup) {
       const selectedMuscleGroup = allMuscleGroups.find(
         (mg) => mg.name === searchMuscleGroup
       );
       if (selectedMuscleGroup) {
-        console.log(searchMuscleGroup);
         dispatch(getExercisesBySearch(selectedMuscleGroup.id, searchText));
+        set_searchText("");
       }
+
       return;
     }
-
+    console.log("got run");
+    set_searchText("");
     dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
   };
 
@@ -70,7 +72,15 @@ export default function Workout() {
     set_addExercises(newWorkoutArray);
   };
 
-  console.log("newWorkout", addExercises);
+  const onClickAddWorkout = (e: MouseEvent) => {
+    e.preventDefault();
+    dispatch(createWorkout(workoutName, addExercises));
+    set_addExercises([]);
+    set_workoutName("");
+    set_searchText("");
+  };
+
+  console.log(searchText);
   return (
     <div className="creatorPage">
       <div className="header">
@@ -82,6 +92,7 @@ export default function Workout() {
           <Form.Control
             type="text"
             onChange={(e) => set_workoutName(e.target.value)}
+            value={workoutName}
             placeholder="Enter workoutname"
           />
         </Form.Group>
@@ -91,7 +102,7 @@ export default function Workout() {
           <Form.Control
             type="text"
             placeholder="Exercise name"
-            onChange={(e) => set_searchText(e.target.value)}
+            onChange={(e) => set_searchText(e.target.value.toLowerCase())}
             value={searchText}
           />
           <Form.Group controlId="exampleForm.ControlSelect1">
@@ -108,7 +119,7 @@ export default function Workout() {
               })}
             </Form.Control>
           </Form.Group>
-          <button onClick={(e) => onClickSearch(e)}>Search exercise</button>
+          <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
         </Form.Group>
         <Form.Group>
           <Form.Label>Add exercises:</Form.Label>
@@ -131,7 +142,7 @@ export default function Workout() {
         </div>
       </Form>
       <div className="buttonParent">
-        <Button>Add workout</Button>
+        <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
       </div>
     </div>
   );
