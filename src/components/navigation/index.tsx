@@ -26,7 +26,7 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
-          {user ? (
+          {user.token ? (
             <div className="userLinks">
               <div className="link">
                 <NavbarItem path="/" linkText="Dashboard" />
