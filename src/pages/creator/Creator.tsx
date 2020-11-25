@@ -23,6 +23,8 @@ export default function Workout() {
   const allMuscleGroups = useSelector(selectMuscleGroups);
   const dispatch = useDispatch();
   const [offSet, set_offSet] = useState(0);
+  const [searchText, set_searchText] = useState("");
+  const [searchMuscleGroup, set_searchMuscleGroup] = useState("");
 
   useEffect(() => {
     dispatch(getAllExercises(offSet));
@@ -32,17 +34,29 @@ export default function Workout() {
     dispatch(getMuscleGroups());
   }, [dispatch]);
 
-  const onClickDispatch = (e: MouseEvent) => {
-    e.preventDefault();
-    set_offSet(offSet + 50);
-    dispatch(getAllExercises(offSet));
-  };
+  // const onClickDispatch = (e: MouseEvent) => {
+  //   e.preventDefault();
+  //   set_offSet(offSet + 50);
+  //   dispatch(getAllExercises(offSet));
+  // };
 
-  const onSelectDispatch = (e: string) => {
-    const selectedMuscleGroup = allMuscleGroups.find((mg) => mg.name === e);
-    if (selectedMuscleGroup) {
-      dispatch(getExercisesBySearch(selectedMuscleGroup.id));
+  const onClickSearch = (e: MouseEvent) => {
+    e.preventDefault();
+
+    if (searchMuscleGroup === "Pick a muscle group...") {
+      set_searchMuscleGroup("");
     }
+
+    if (searchMuscleGroup) {
+      const selectedMuscleGroup = allMuscleGroups.find(
+        (mg) => mg.name === searchMuscleGroup
+      );
+      if (selectedMuscleGroup) {
+        dispatch(getExercisesBySearch(selectedMuscleGroup.id, searchText));
+      }
+      return;
+    }
+    dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
   };
 
   return (
@@ -58,13 +72,18 @@ export default function Workout() {
 
         <Form.Group controlId="formSearchText">
           <Form.Label>Search by name</Form.Label>
-          <Form.Control type="text" placeholder="Exercise name" />
+          <Form.Control
+            type="text"
+            placeholder="Exercise name"
+            onChange={(e) => set_searchText(e.target.value)}
+            value={searchText}
+          />
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Search by muscle group</Form.Label>
             <Form.Control
               as="select"
               onChange={(e) => {
-                onSelectDispatch(e.target.value);
+                set_searchMuscleGroup(e.target.value);
               }}
             >
               <option>Pick a muscle group...</option>
@@ -73,6 +92,7 @@ export default function Workout() {
               })}
             </Form.Control>
           </Form.Group>
+          <button onClick={(e) => onClickSearch(e)}>Search exercise</button>
         </Form.Group>
         <Form.Group>
           <Form.Label>Add exercises:</Form.Label>
@@ -88,7 +108,6 @@ export default function Workout() {
             );
           })}
         </div>
-        <button onClick={(e) => onClickDispatch(e)}>Get more exercises</button>
       </Form>
     </div>
   );

@@ -41,15 +41,17 @@ export const getAllExercises = (
 };
 
 export const getExercisesBySearch = (
-  muscleGroupId: number
+  muscleGroupId: number | string,
+  exerciseName: string
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch,
   getState
 ) => {
+  console.log("got run");
   dispatch(appLoading);
   try {
     const res = await axios.get(
-      `${apiUrl}/exercises/search?muscleGroupId=${muscleGroupId}`
+      `${apiUrl}/exercises/search?muscleGroupId=${muscleGroupId}&exerciseName=${exerciseName}`
     );
     const exercises = res.data;
     dispatch(exerciseSearchSucces(exercises));
