@@ -17,6 +17,19 @@
     display: flex;
     justify-content: center;
     margin-top: 10px;
+
+    .buttonParent {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: rgb(53, 53, 53);
+      color: white;
+      text-align: end;
+      Button {
+        margin: 5px;
+      }
+    }
     .exerciseList {
       width: 365px;
       margin: 0 10px;
