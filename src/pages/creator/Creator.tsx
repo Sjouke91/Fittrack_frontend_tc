@@ -24,7 +24,11 @@ export default function Workout() {
   const dispatch = useDispatch();
   const [offSet, set_offSet] = useState(0);
   const [searchText, set_searchText] = useState("");
-  const [searchMuscleGroup, set_searchMuscleGroup] = useState("");
+  const [searchMuscleGroup, set_searchMuscleGroup] = useState<string | number>(
+    ""
+  );
+  const [workoutName, set_workoutName] = useState("");
+  const [addExercises, set_addExercises] = useState<number[]>([]);
 
   useEffect(() => {
     dispatch(getAllExercises(offSet));
@@ -34,31 +38,39 @@ export default function Workout() {
     dispatch(getMuscleGroups());
   }, [dispatch]);
 
-  // const onClickDispatch = (e: MouseEvent) => {
-  //   e.preventDefault();
-  //   set_offSet(offSet + 50);
-  //   dispatch(getAllExercises(offSet));
-  // };
-
   const onClickSearch = (e: MouseEvent) => {
     e.preventDefault();
 
     if (searchMuscleGroup === "Pick a muscle group...") {
+      console.log("got run");
       set_searchMuscleGroup("");
     }
-
+    console.log(searchMuscleGroup);
     if (searchMuscleGroup) {
       const selectedMuscleGroup = allMuscleGroups.find(
         (mg) => mg.name === searchMuscleGroup
       );
       if (selectedMuscleGroup) {
+        console.log(searchMuscleGroup);
         dispatch(getExercisesBySearch(selectedMuscleGroup.id, searchText));
       }
       return;
     }
+
     dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
   };
 
+  const onClickSelect = (e: MouseEvent, exerciseId: number) => {
+    e.preventDefault();
+    if (!addExercises.includes(exerciseId)) {
+      set_addExercises([...addExercises, exerciseId]);
+      return;
+    }
+    const newWorkoutArray = addExercises.filter((eId) => eId !== exerciseId);
+    set_addExercises(newWorkoutArray);
+  };
+
+  console.log("newWorkout", addExercises);
   return (
     <div className="creatorPage">
       <div className="header">
@@ -67,7 +79,11 @@ export default function Workout() {
       <Form>
         <Form.Group controlId="formName">
           <Form.Label>Name of workout</Form.Label>
-          <Form.Control type="text" placeholder="Enter workoutname" />
+          <Form.Control
+            type="text"
+            onChange={(e) => set_workoutName(e.target.value)}
+            placeholder="Enter workoutname"
+          />
         </Form.Group>
 
         <Form.Group controlId="formSearchText">
@@ -99,16 +115,24 @@ export default function Workout() {
         </Form.Group>
         <div className="exerciseList">
           {allExercises.map((e, i) => {
+            const exerciseId = e.id;
+            const exerciseSelected = addExercises.includes(e.id)
+              ? "exerciseCardSelected"
+              : "exerciseCard";
+
             return (
-              <div className="exerciseCard" key={i}>
-                <p>{}</p>
-                <p>{`${e.id}.  ${e.name}`}</p>
-                <p>{e.muscleGroup.name}</p>
-              </div>
+              <button key={i} onClick={(e) => onClickSelect(e, exerciseId)}>
+                <div className={exerciseSelected}>
+                  <p>{e.name}</p>
+                </div>
+              </button>
             );
           })}
         </div>
       </Form>
+      <div className="buttonParent">
+        <Button>Add workout</Button>
+      </div>
     </div>
   );
 }

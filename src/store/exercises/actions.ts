@@ -47,7 +47,7 @@ export const getExercisesBySearch = (
   dispatch,
   getState
 ) => {
-  console.log("got run");
+  console.log("Action");
   dispatch(appLoading);
   try {
     const res = await axios.get(
