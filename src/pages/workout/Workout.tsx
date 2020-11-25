@@ -2,8 +2,11 @@ import "./Workout.scss";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getExercises, submitExercise } from "../../store/exercises/actions";
-import { importExercises } from "../../store/exercises/selectors";
+import {
+  getWorkoutExercises,
+  submitExercise,
+} from "../../store/exercises/actions";
+import { importWorkoutExercises } from "../../store/exercises/selectors";
 import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
 
@@ -11,7 +14,7 @@ export default function Workout() {
   const { id } = useParams<ParamTypes>();
   const workoutId = parseInt(id);
   const dispatch = useDispatch();
-  const allExercises = useSelector(importExercises);
+  const allExercises = useSelector(importWorkoutExercises);
   const [finishExercise, setFinishExercise] = useState<ExerciseSubmit>({
     workoutId: workoutId,
     id: null,
@@ -22,7 +25,7 @@ export default function Workout() {
   });
 
   useEffect(() => {
-    dispatch(getExercises(workoutId));
+    dispatch(getWorkoutExercises(workoutId));
   }, [dispatch, workoutId]);
 
   const onClickSubmit = (id: number) => {
@@ -65,7 +68,7 @@ export default function Workout() {
                         reps: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.reps}
+                    value={finishExercise.reps || ""}
                     required
                   ></input>
                   <input
@@ -77,7 +80,7 @@ export default function Workout() {
                         sets: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.sets}
+                    value={finishExercise.sets || ""}
                   ></input>
                   <input
                     type="number"
@@ -88,7 +91,7 @@ export default function Workout() {
                         kg: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.kg}
+                    value={finishExercise.kg || ""}
                     required
                   ></input>
                   <input
@@ -100,7 +103,7 @@ export default function Workout() {
                         RPE: parseInt(e.target.value),
                       });
                     }}
-                    value={finishExercise.RPE}
+                    value={finishExercise.RPE || ""}
                     required
                   ></input>
                 </div>

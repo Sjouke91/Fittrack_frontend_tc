@@ -1,0 +1,67 @@
+.creatorPage {
+  .header {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(224, 224, 224);
+    align-items: center;
+    height: 10vh;
+    h2 {
+      font-weight: 200;
+      font-size: 28px;
+    }
+  }
+  .exerciseList {
+    border: 1px solid rgb(29, 29, 29);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    justify-content: center;
+
+    button {
+      border: none;
+      height: 60px;
+    }
+    .exerciseCard {
+      width: 180px;
+      height: 55px;
+      margin: 2px;
+      margin-bottom: 60px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
+      border: 1px solid rgb(29, 29, 29);
+      border-radius: 5px;
+      align-items: center;
+
+      p {
+        margin: 0;
+      }
+    }
+    .exerciseCardSelected {
+      width: 180px;
+      height: 55px;
+      margin: 2px;
+      margin-bottom: 60px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
+      border: 5px solid rgb(1, 61, 129);
+      border-radius: 5px;
+      align-items: center;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+  .buttonParent {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(53, 53, 53);
+    color: white;
+    text-align: end;
+    Button {
+      margin: 5px;
+    }
+  }
+}

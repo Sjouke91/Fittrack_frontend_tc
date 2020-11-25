@@ -33,6 +33,7 @@ export type Workout = {
 
 export type MuscleGroup = {
   name: string;
+  id: number;
 };
 
 export type ExerciseSubmit = {
@@ -47,3 +48,8 @@ export type ExerciseSubmit = {
 export interface ParamTypes {
   id: string;
 }
+
+export type Search = {
+  exerciseName: string;
+  muscleGroupId: string;
+};

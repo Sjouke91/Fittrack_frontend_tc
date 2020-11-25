@@ -7,6 +7,7 @@ import { selectUser } from "../../store/user/selectors";
 import NavbarItem from "./NavBarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
+import logo from "../../logo/logo.png";
 
 export default function Navigation() {
   const user = useSelector(selectUser);
@@ -21,7 +22,7 @@ export default function Navigation() {
       variant="dark"
       expand="lg"
     >
-      <img className="logo" src={require("../../logo/logo.png")} alt="logo" />
+      <img className="logo" src={logo} alt="logo" />
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>

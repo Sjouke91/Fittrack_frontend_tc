@@ -1,10 +1,18 @@
+export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
+export const GET_EXERCISES_BY_SEARCH = "GET_EXERCISES_BY_SEARCH";
 export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
 
-export interface Exercise {
+export type Exercise = {
   id: number;
   name: string;
-}
+  muscleGroup: MuscleGroup;
+};
+
+export type MuscleGroup = {
+  id: number;
+  name: string;
+};
 
 export type ExerciseSubmit = {
   workoutId: number;
@@ -21,6 +29,16 @@ export interface ExercisesWithWorkout {
   exercise: Exercise;
 }
 
+interface getAllExercisesAction {
+  type: typeof GET_ALL_EXERCISES;
+  payload: Exercise[];
+}
+
+interface getExercisesBySearchAction {
+  type: typeof GET_EXERCISES_BY_SEARCH;
+  payload: Exercise[];
+}
+
 interface getWorkoutExercisesAction {
   type: typeof GET_WORKOUT_EXERCISES;
   payload: ExercisesWithWorkout[];
@@ -32,9 +50,11 @@ interface submitExerciseAction {
 }
 
 export type ExerciseActionTypes =
+  | getAllExercisesAction
   | getWorkoutExercisesAction
-  | submitExerciseAction;
+  | submitExerciseAction
+  | getExercisesBySearchAction;
 
 export interface ExerciseState {
-  exercises: { all: ExercisesWithWorkout[] };
+  exercises: { workout: ExercisesWithWorkout[]; all: Exercise[] };
 }
