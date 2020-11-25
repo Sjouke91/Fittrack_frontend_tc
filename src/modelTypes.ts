@@ -45,6 +45,8 @@ export type ExerciseSubmit = {
   RPE: number | null;
 };
 
+export type WorkoutState = ExerciseSubmit[];
+
 export interface ParamTypes {
   id: string;
 }

@@ -8,41 +8,52 @@ import {
 } from "../../store/exercises/actions";
 import { importWorkoutExercises } from "../../store/exercises/selectors";
 import { Button } from "react-bootstrap";
-import { ExerciseSubmit, ParamTypes } from "../../modelTypes";
+import { ExerciseSubmit, ParamTypes, WorkoutState } from "../../modelTypes";
+import ExerciseCard from "../../components/exerciseCard/ExerciseCard";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
   const workoutId = parseInt(id);
   const dispatch = useDispatch();
   const allExercises = useSelector(importWorkoutExercises);
-  const [finishExercise, setFinishExercise] = useState<ExerciseSubmit>({
-    workoutId: workoutId,
-    id: null,
-    reps: null,
-    sets: null,
-    kg: null,
-    RPE: null,
-  });
+
+  const [workoutState, setWorkoutState] = useState<WorkoutState>([]);
 
   useEffect(() => {
     dispatch(getWorkoutExercises(workoutId));
   }, [dispatch, workoutId]);
 
-  const onClickSubmit = (id: number) => {
-    console.log("clicked", id);
-    setFinishExercise({ ...finishExercise, id, workoutId });
-    dispatch(submitExercise(finishExercise));
-    setFinishExercise({
-      workoutId: workoutId,
-      id: null,
-      reps: null,
-      sets: null,
-      kg: null,
-      RPE: null,
+  useEffect(() => {
+    const state: ExerciseSubmit[] = allExercises.map((e) => {
+      const newObject = {
+        workoutId: workoutId,
+        id: e.id,
+        kg: null,
+        sets: null,
+        reps: null,
+        RPE: null,
+      };
+      return newObject;
     });
+    setWorkoutState(state);
+  }, [allExercises]);
+
+  const setExState = (id: number, key: string, value: number) => {
+    const newState = workoutState.map((e) => {
+      if (e.id === id) {
+        return { ...e, [key]: value };
+      } else {
+        return e;
+      }
+    });
+    setWorkoutState(newState);
   };
 
-  console.log(finishExercise);
+  const onClickLogWorkout = () => {
+    workoutState.map((w) => dispatch(submitExercise(w)));
+  };
+
+  console.log("this is workoutSTate", workoutState);
 
   return (
     <div className="exercisePage">
@@ -53,68 +64,19 @@ export default function Workout() {
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             return (
-              <div key={e.id} className="exerciseCard">
-                <div className="exerciseTitle">
-                  <p>{i + 1}</p>
-                  <p>{e.name}</p>
-                </div>
-                <div className="exerciseInput">
-                  <input
-                    type="number"
-                    placeholder="reps"
-                    onChange={(e) => {
-                      setFinishExercise({
-                        ...finishExercise,
-                        reps: parseInt(e.target.value),
-                      });
-                    }}
-                    value={finishExercise.reps || ""}
-                    required
-                  ></input>
-                  <input
-                    type="number"
-                    placeholder="sets"
-                    onChange={(e) => {
-                      setFinishExercise({
-                        ...finishExercise,
-                        sets: parseInt(e.target.value),
-                      });
-                    }}
-                    value={finishExercise.sets || ""}
-                  ></input>
-                  <input
-                    type="number"
-                    placeholder="kg"
-                    onChange={(e) => {
-                      setFinishExercise({
-                        ...finishExercise,
-                        kg: parseInt(e.target.value),
-                      });
-                    }}
-                    value={finishExercise.kg || ""}
-                    required
-                  ></input>
-                  <input
-                    type="number"
-                    placeholder="rpe"
-                    onChange={(e) => {
-                      setFinishExercise({
-                        ...finishExercise,
-                        RPE: parseInt(e.target.value),
-                      });
-                    }}
-                    value={finishExercise.RPE || ""}
-                    required
-                  ></input>
-                </div>
-                <div className="buttons">
-                  <Button id="button" onClick={() => onClickSubmit(e.id)}>
-                    Finish
-                  </Button>
-                </div>
-              </div>
+              <ExerciseCard
+                key={e.id}
+                id={workoutId}
+                name={e.name}
+                index={i}
+                exerciseId={e.id}
+                setExState={setExState}
+              />
             );
           })}
+        </div>
+        <div className="buttonParent">
+          <Button onClick={(e) => onClickLogWorkout()}>Finish workout</Button>
         </div>
       </div>
     </div>

@@ -57,7 +57,6 @@ export default function Workout() {
 
       return;
     }
-    console.log("got run");
     set_searchText("");
     dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
   };
@@ -80,7 +79,6 @@ export default function Workout() {
     set_searchText("");
   };
 
-  console.log(searchText);
   return (
     <div className="creatorPage">
       <div className="header">

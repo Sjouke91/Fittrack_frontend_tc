@@ -91,9 +91,9 @@ export const submitExercise = ({
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
-  console.log("got run", id);
   const token = selectToken(getState());
   dispatch(appLoading);
+
   try {
     await axios.post(
       `${apiUrl}/exercises/${id}`,
