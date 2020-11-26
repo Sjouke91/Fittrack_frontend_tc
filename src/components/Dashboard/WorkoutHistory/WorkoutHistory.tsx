@@ -8,6 +8,7 @@ import { Table } from "react-bootstrap";
 export default function WorkoutHistory() {
   const allExercises = useSelector(SelectUserExercises);
   const [index, set_index] = useState(0);
+  const [workoutDate, set_workoutDate] = useState("");
 
   const onClickPrevious = (e: MouseEvent) => {
     set_index(index + 1);
@@ -22,9 +23,9 @@ export default function WorkoutHistory() {
   );
 
   const newArray = Object.values(groupedExercises);
+  const dateArray = Object.keys(groupedExercises);
   const currentExercise = newArray[index];
-
-  console.log("this is grouped", newArray);
+  const currentWorkoutDate = new Date(dateArray[index]).toDateString();
 
   return (
     <div className="WorkoutHistoryComponent">
@@ -36,6 +37,7 @@ export default function WorkoutHistory() {
         <button onClick={(e) => onClickNext(e)}>›</button>
       </div>
       <div className="exerciseList">
+        {currentWorkoutDate !== "Invalid Date" ? currentWorkoutDate : null}
         {currentExercise ? (
           <Table striped bordered hover>
             <thead>
