@@ -84,6 +84,7 @@ export const getWorkoutExercises = (
 };
 
 export const submitExercise = ({
+  workoutStart,
   workoutId,
   id,
   reps,
@@ -103,6 +104,7 @@ export const submitExercise = ({
     await axios.post(
       `${apiUrl}/exercises/${id}`,
       {
+        workoutStart,
         workoutId,
         reps,
         sets,

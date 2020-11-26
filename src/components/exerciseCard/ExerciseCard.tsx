@@ -20,16 +20,6 @@ type Props = {
 
 export default function ExerciseCard(props: Props) {
   const { id: workoutId, name, index, exerciseId, setExState } = props;
-  const dispatch = useDispatch();
-
-  const [finishExercise, setFinishExercise] = useState<ExerciseSubmit>({
-    workoutId: workoutId,
-    id: null,
-    reps: null,
-    sets: null,
-    kg: null,
-    RPE: null,
-  });
 
   return (
     <div className="exerciseCard">

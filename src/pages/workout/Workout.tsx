@@ -16,6 +16,7 @@ export default function Workout() {
   const workoutId = parseInt(id);
   const dispatch = useDispatch();
   const allExercises = useSelector(importWorkoutExercises);
+  const [workoutStart, set_workoutStart] = useState<Date | null>(null);
 
   const [workoutState, setWorkoutState] = useState<WorkoutState>([]);
 
@@ -26,6 +27,7 @@ export default function Workout() {
   useEffect(() => {
     const state: ExerciseSubmit[] = allExercises.map((e) => {
       const newObject = {
+        workoutStart: workoutStart,
         workoutId: workoutId,
         id: e.id,
         kg: null,
@@ -36,7 +38,7 @@ export default function Workout() {
       return newObject;
     });
     setWorkoutState(state);
-  }, [allExercises]);
+  }, [allExercises, workoutStart]);
 
   const setExState = (id: number, key: string, value: number) => {
     const newState = workoutState.map((e) => {
@@ -53,8 +55,6 @@ export default function Workout() {
     workoutState.map((w) => dispatch(submitExercise(w)));
   };
 
-  console.log("this is workoutSTate", workoutState);
-
   return (
     <div className="exercisePage">
       <div className="header">
@@ -62,18 +62,24 @@ export default function Workout() {
       </div>
       <div className="allExercises">
         <div className="exerciseList">
-          {allExercises.map((e, i) => {
-            return (
-              <ExerciseCard
-                key={e.id}
-                id={workoutId}
-                name={e.name}
-                index={i}
-                exerciseId={e.id}
-                setExState={setExState}
-              />
-            );
-          })}
+          {!workoutStart ? (
+            <Button onClick={() => set_workoutStart(new Date())}>
+              Start workout
+            </Button>
+          ) : (
+            allExercises.map((e, i) => {
+              return (
+                <ExerciseCard
+                  key={e.id}
+                  id={workoutId}
+                  name={e.name}
+                  index={i}
+                  exerciseId={e.id}
+                  setExState={setExState}
+                />
+              );
+            })
+          )}
         </div>
         <div className="buttonParent">
           <Button onClick={(e) => onClickLogWorkout()}>Finish workout</Button>
