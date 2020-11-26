@@ -1,4 +1,4 @@
-export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
+export const GET_LOGGED_EXERCISES = "GET_LOGGED_EXERCISES";
 export const GET_EXERCISES_BY_SEARCH = "GET_EXERCISES_BY_SEARCH";
 export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
@@ -7,6 +7,17 @@ export type Exercise = {
   id: number;
   name: string;
   muscleGroup: MuscleGroup;
+};
+
+export type loggedExercise = {
+  id: number;
+  kg: number;
+  sets: number;
+  reps: number;
+  RPE: number;
+  workout: MuscleGroup;
+  workoutStart: string;
+  createdAt: string;
 };
 
 export type MuscleGroup = {
@@ -29,11 +40,6 @@ export interface ExercisesWithWorkout {
   exercise: Exercise;
 }
 
-interface getAllExercisesAction {
-  type: typeof GET_ALL_EXERCISES;
-  payload: Exercise[];
-}
-
 interface getExercisesBySearchAction {
   type: typeof GET_EXERCISES_BY_SEARCH;
   payload: Exercise[];
@@ -49,12 +55,21 @@ interface submitExerciseAction {
   payload: ExerciseSubmit;
 }
 
+interface getLoggedExercisesOfUser {
+  type: typeof GET_LOGGED_EXERCISES;
+  payload: loggedExercise[];
+}
+
 export type ExerciseActionTypes =
-  | getAllExercisesAction
+  | getLoggedExercisesOfUser
   | getWorkoutExercisesAction
   | submitExerciseAction
   | getExercisesBySearchAction;
 
 export interface ExerciseState {
-  exercises: { workout: ExercisesWithWorkout[]; all: Exercise[] };
+  exercises: {
+    workout: ExercisesWithWorkout[];
+    search: Exercise[];
+    user: loggedExercise[];
+  };
 }

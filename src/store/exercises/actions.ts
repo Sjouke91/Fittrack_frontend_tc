@@ -9,31 +9,37 @@ import {
 import { selectToken } from "../user/selectors";
 import {
   GET_WORKOUT_EXERCISES,
-  GET_ALL_EXERCISES,
+  GET_LOGGED_EXERCISES,
   GET_EXERCISES_BY_SEARCH,
   ExerciseActionTypes,
   ExerciseState,
   ExercisesWithWorkout,
   Exercise,
   ExerciseSubmit,
+  loggedExercise,
 } from "./types";
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
 
-export const getAllExercises = (
-  offset: number
-): ThunkAction<void, RootState, unknown, Action<string>> => async (
-  dispatch,
-  getState
-) => {
+export const getAllExercises = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  Action<string>
+> => async (dispatch, getState) => {
+  const token = selectToken(getState());
+  console.log("got here");
+
+  if (token === null) return;
+
   dispatch(appLoading);
   try {
-    const res = await axios.get(
-      `${apiUrl}/exercises?offset=${offset}&limit=50`
-    );
+    const res = await axios.get(`${apiUrl}/exercises`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const exercises = res.data;
-    dispatch(allExerciseSucces(exercises));
+    dispatch(allExerciseOfUserSucces(exercises));
     dispatch(appDoneLoading);
   } catch (e) {
     console.log("ERROR:", e.message);
@@ -124,10 +130,18 @@ const workoutExerciseSucces = (
   return { type: GET_WORKOUT_EXERCISES, payload: exercises };
 };
 
-const allExerciseSucces = (exercises: Exercise[]): ExerciseActionTypes => {
-  return { type: GET_ALL_EXERCISES, payload: exercises };
-};
+// const allExerciseSucces = (
+//   exercises: loggedExercise[]
+// ): ExerciseActionTypes => {
+//   return { type: GET_ALL_EXERCISES, payload: exercises };
+// };
 
 const exerciseSearchSucces = (exercises: Exercise[]): ExerciseActionTypes => {
   return { type: GET_EXERCISES_BY_SEARCH, payload: exercises };
+};
+
+const allExerciseOfUserSucces = (
+  exercises: loggedExercise[]
+): ExerciseActionTypes => {
+  return { type: GET_LOGGED_EXERCISES, payload: exercises };
 };
