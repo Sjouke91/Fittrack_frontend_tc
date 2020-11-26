@@ -29,7 +29,6 @@ export const getAllExercises = (): ThunkAction<
   Action<string>
 > => async (dispatch, getState) => {
   const token = selectToken(getState());
-  console.log("got here");
 
   if (token === null) return;
 
@@ -129,12 +128,6 @@ const workoutExerciseSucces = (
 ): ExerciseActionTypes => {
   return { type: GET_WORKOUT_EXERCISES, payload: exercises };
 };
-
-// const allExerciseSucces = (
-//   exercises: loggedExercise[]
-// ): ExerciseActionTypes => {
-//   return { type: GET_ALL_EXERCISES, payload: exercises };
-// };
 
 const exerciseSearchSucces = (exercises: Exercise[]): ExerciseActionTypes => {
   return { type: GET_EXERCISES_BY_SEARCH, payload: exercises };

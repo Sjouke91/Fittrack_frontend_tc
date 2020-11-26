@@ -1,0 +1,24 @@
+.WorkoutHistoryComponent {
+  .scroller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .scrollerText {
+      display: flex;
+      align-items: center;
+      padding-top: 16px;
+      p {
+      }
+    }
+
+    button {
+      border: none;
+      background-color: white;
+      height: 2em;
+      font-weight: 900;
+      font-size: 18px;
+    }
+  }
+}

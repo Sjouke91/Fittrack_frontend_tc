@@ -17,5 +17,25 @@ export const importWorkoutExercises = (state: ExerciseState) => {
 export const importSearchedExercises = (state: ExerciseState) =>
   state.exercises.search;
 
+export const SelectUserWorkouts = (state: ExerciseState) => {
+  const newArray = state.exercises.user.filter(
+    (v, i, a) =>
+      a.findIndex(
+        (t) =>
+          t.workout.id === v.workout.id && t.workoutStart === v.workoutStart
+      ) === i
+  );
+
+  const schedulerData = newArray.map((e) => {
+    return {
+      startDate: e.workoutStart,
+      endDate: e.createdAt,
+      title: e.workout.name,
+    };
+  });
+
+  return schedulerData;
+};
+
 export const SelectUserExercises = (state: ExerciseState) =>
   state.exercises.user;

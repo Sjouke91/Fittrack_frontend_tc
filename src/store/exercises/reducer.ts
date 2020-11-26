@@ -17,7 +17,7 @@ export default (state = initialState, action: ExerciseActionTypes) => {
     case GET_WORKOUT_EXERCISES:
       return { ...state, workout: action.payload };
     case GET_LOGGED_EXERCISES:
-      return { ...state, user: [...state.user, ...action.payload] };
+      return { ...state, user: action.payload };
     case GET_EXERCISES_BY_SEARCH:
       return { ...state, search: action.payload };
     default:

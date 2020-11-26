@@ -16,6 +16,7 @@ export type loggedExercise = {
   reps: number;
   RPE: number;
   workout: MuscleGroup;
+  exercise: MuscleGroup;
   workoutStart: string;
   createdAt: string;
 };
