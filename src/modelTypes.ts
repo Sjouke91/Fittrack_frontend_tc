@@ -37,6 +37,7 @@ export type MuscleGroup = {
 };
 
 export type ExerciseSubmit = {
+  workoutStart: Date | null;
   workoutId: number;
   id: number | null;
   kg: number | null;
