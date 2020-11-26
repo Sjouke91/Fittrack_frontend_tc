@@ -2,11 +2,8 @@ import "./Creator.scss";
 import React, { useEffect, useState, MouseEvent } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllExercises,
-  getExercisesBySearch,
-} from "../../store/exercises/actions";
-import { importAllExercises } from "../../store/exercises/selectors";
+import { getExercisesBySearch } from "../../store/exercises/actions";
+import { importSearchedExercises } from "../../store/exercises/selectors";
 import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
 import {
@@ -20,7 +17,7 @@ import { getMuscleGroups } from "../../store/muscleGroups/actions";
 import { createWorkout } from "../../store/workouts/actions";
 
 export default function Workout() {
-  const allExercises = useSelector(importAllExercises);
+  const allExercises = useSelector(importSearchedExercises);
   const allMuscleGroups = useSelector(selectMuscleGroups);
   const dispatch = useDispatch();
   const [offSet, set_offSet] = useState(0);
@@ -30,10 +27,6 @@ export default function Workout() {
   );
   const [workoutName, set_workoutName] = useState("");
   const [addExercises, set_addExercises] = useState<number[]>([]);
-
-  useEffect(() => {
-    dispatch(getAllExercises(offSet));
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getMuscleGroups());
@@ -118,9 +111,6 @@ export default function Workout() {
             </Form.Control>
           </Form.Group>
           <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Add exercises:</Form.Label>
         </Form.Group>
         <div className="exerciseList">
           {allExercises.map((e, i) => {
