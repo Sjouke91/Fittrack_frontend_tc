@@ -1,9 +1,9 @@
 import "./Graph.scss";
 import React, { MouseEvent, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { SelectUserExercises } from "../../../store/exercises/selectors";
 import * as _ from "lodash";
-import { Table } from "react-bootstrap";
+
 import {
   LineChart,
   Line,

@@ -1,14 +1,5 @@
 import "./ExerciseCard.scss";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getWorkoutExercises,
-  submitExercise,
-} from "../../store/exercises/actions";
-import { importWorkoutExercises } from "../../store/exercises/selectors";
-import { Button } from "react-bootstrap";
-import { ExerciseSubmit, ParamTypes, WorkoutState } from "../../modelTypes";
+import React from "react";
 
 type Props = {
   id: number;
@@ -19,7 +10,7 @@ type Props = {
 };
 
 export default function ExerciseCard(props: Props) {
-  const { id: workoutId, name, index, exerciseId, setExState } = props;
+  const { name, index, exerciseId, setExState } = props;
 
   return (
     <div className="exerciseCard">

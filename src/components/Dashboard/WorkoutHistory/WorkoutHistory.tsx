@@ -1,8 +1,7 @@
 import "./WorkoutHistory.scss";
-import React, { MouseEvent, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { SelectLoggedExercises } from "../../../store/exercises/selectors";
-import * as _ from "lodash";
 import { Table } from "react-bootstrap";
 
 type Props = {
@@ -23,9 +22,9 @@ export default function WorkoutHistory(props: Props) {
 
   useEffect(() => {
     if (selectedWorkoutArray && selectedWorkoutArray.length) {
-      // current.reduce --> result unique workoutId
       updateWorkoutId(selectedWorkoutArray[0].workout.id);
     }
+    // eslint-disable-next-line
   }, [selectedWorkoutArray]);
 
   const onClickPrevious = () => {

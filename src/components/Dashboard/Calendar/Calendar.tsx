@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
-  DayView,
   Appointments,
   MonthView,
-  WeekView,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { SelectUserWorkouts } from "../../../store/exercises/selectors";
 import "./Calendar.scss";
