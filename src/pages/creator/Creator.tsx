@@ -1,18 +1,10 @@
 import "./Creator.scss";
 import React, { useEffect, useState, MouseEvent } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getExercisesBySearch } from "../../store/exercises/actions";
 import { importSearchedExercises } from "../../store/exercises/selectors";
 import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
-import {
-  ExerciseSubmit,
-  ParamTypes,
-  Search,
-  MuscleGroup,
-} from "../../modelTypes";
-import TextInput from "react-bootstrap/Button";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
 import { createWorkout } from "../../store/workouts/actions";
 
@@ -20,7 +12,6 @@ export default function Workout() {
   const allExercises = useSelector(importSearchedExercises);
   const allMuscleGroups = useSelector(selectMuscleGroups);
   const dispatch = useDispatch();
-  const [offSet, set_offSet] = useState(0);
   const [searchText, set_searchText] = useState("");
   const [searchMuscleGroup, set_searchMuscleGroup] = useState<string | number>(
     ""
@@ -97,7 +88,7 @@ export default function Workout() {
             value={searchText}
           />
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Search by muscle group</Form.Label>
+            <Form.Label>Select muscle group</Form.Label>
             <Form.Control
               as="select"
               onChange={(e) => {
