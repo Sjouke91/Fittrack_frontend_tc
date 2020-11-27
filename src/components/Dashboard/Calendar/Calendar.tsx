@@ -9,18 +9,15 @@ import {
   MonthView,
   WeekView,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { getAllExercises } from "../../../store/exercises/actions";
 import { SelectUserWorkouts } from "../../../store/exercises/selectors";
-import "./Calender.scss";
+import "./Calendar.scss";
 
-export default function Test() {
+export default function Calendar() {
   const currentDate = new Date();
   const schedulerData = useSelector(SelectUserWorkouts);
 
-  console.log("This is schedule", schedulerData);
-
   return (
-    <div className="calenderComponent">
+    <div className="calendarComponent">
       <Paper>
         <Scheduler data={schedulerData} height={400} firstDayOfWeek={1}>
           <ViewState currentDate={currentDate} />
