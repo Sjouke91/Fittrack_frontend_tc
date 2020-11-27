@@ -1,45 +1,65 @@
 import "./WorkoutHistory.scss";
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SelectUserExercises } from "../../../store/exercises/selectors";
+import { SelectLoggedExercises } from "../../../store/exercises/selectors";
 import * as _ from "lodash";
 import { Table } from "react-bootstrap";
 
-export default function WorkoutHistory() {
-  const allExercises = useSelector(SelectUserExercises);
+type Props = {
+  updateWorkoutId: (workoutId: number) => void;
+};
+
+export default function WorkoutHistory(props: Props) {
+  const { updateWorkoutId } = props;
+  const allLoggedExercises = useSelector(SelectLoggedExercises);
   const [index, set_index] = useState(0);
-  const [workoutDate, set_workoutDate] = useState("");
 
-  const onClickPrevious = (e: MouseEvent) => {
-    set_index(index + 1);
+  const selectedWorkoutArray = allLoggedExercises.length
+    ? allLoggedExercises[index].exercises
+    : [];
+  const selectedWorkoutDate = allLoggedExercises.length
+    ? new Date(allLoggedExercises[index].date).toDateString()
+    : "";
+
+  useEffect(() => {
+    if (selectedWorkoutArray && selectedWorkoutArray.length) {
+      // current.reduce --> result unique workoutId
+      updateWorkoutId(selectedWorkoutArray[0].workout.id);
+    }
+  }, [selectedWorkoutArray]);
+
+  const onClickPrevious = () => {
+    if (index + 1 < allLoggedExercises.length) {
+      set_index(index + 1);
+    }
   };
-  const onClickNext = (e: MouseEvent) => {
-    set_index(index - 1);
+
+  const onClickNext = () => {
+    if (index > 0) {
+      set_index(index - 1);
+    }
   };
-
-  const groupedExercises = _.mapValues(
-    _.groupBy(allExercises, "workoutStart"),
-    (elist) => elist.map((exercise) => _.omit(exercise, "workoutStart"))
-  );
-
-  const newArray = Object.values(groupedExercises);
-  const dateArray = Object.keys(groupedExercises);
-  const currentExercise = newArray[index];
-  const currentWorkoutDate = new Date(dateArray[index]).toDateString();
 
   return (
     <div className="WorkoutHistoryComponent">
       <div className="scroller">
-        <button onClick={(e) => onClickPrevious(e)}>‹</button>
+        <button className="backwardButton" onClick={() => onClickPrevious()}>
+          ‹
+        </button>
         <div className="scrollerText">
-          <p>Scroll workouts</p>
+          <p>
+            {selectedWorkoutDate !== "Invalid Date"
+              ? selectedWorkoutDate
+              : null}
+          </p>
         </div>
-        <button onClick={(e) => onClickNext(e)}>›</button>
+        <button className="forwardButton" onClick={() => onClickNext()}>
+          ›
+        </button>
       </div>
-      <div className="exerciseList">
-        {currentWorkoutDate !== "Invalid Date" ? currentWorkoutDate : null}
-        {currentExercise ? (
-          <Table striped bordered hover>
+      <div className="exerciseTable">
+        {selectedWorkoutArray ? (
+          <Table striped bordered hover size="sm">
             <thead>
               <tr>
                 <th>#</th>
@@ -51,7 +71,7 @@ export default function WorkoutHistory() {
               </tr>
             </thead>
 
-            {currentExercise.map((e, i) => {
+            {selectedWorkoutArray.map((e, i) => {
               return (
                 <tbody key={e.id}>
                   <tr>

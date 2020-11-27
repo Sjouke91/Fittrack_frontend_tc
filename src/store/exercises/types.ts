@@ -10,6 +10,7 @@ export type Exercise = {
 };
 
 export type loggedExercise = {
+  exerciseId: number;
   id: number;
   kg: number;
   sets: number;

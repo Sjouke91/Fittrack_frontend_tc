@@ -1,4 +1,5 @@
-.WorkoutHistoryComponent {
+.graphComponent {
+  margin: 10px;
   .scroller {
     display: flex;
     justify-content: center;
@@ -20,12 +21,5 @@
       font-weight: 900;
       font-size: 18px;
     }
-    .forwardButton {
-      position: relative;
-    }
-  }
-
-  .exerciseTable {
-    font-size: 12px;
   }
 }

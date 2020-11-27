@@ -5,6 +5,7 @@ import {
   ExercisesWithWorkout,
   Exercise,
 } from "./types";
+import * as _ from "lodash";
 
 export const importWorkoutExercises = (state: ExerciseState) => {
   const exerciseArray = state.exercises.workout.map((e) => {
@@ -37,5 +38,29 @@ export const SelectUserWorkouts = (state: ExerciseState) => {
   return schedulerData;
 };
 
-export const SelectUserExercises = (state: ExerciseState) =>
-  state.exercises.user;
+export const SelectUserExercises = (state: ExerciseState) => {
+  const exercisesByWorkout = _.mapValues(
+    _.groupBy(state.exercises.user, "workout.id")
+  );
+
+  return exercisesByWorkout;
+};
+
+export const SelectLoggedExercises = (state: ExerciseState) => {
+  const ExercisesGroupedByWorkout = state.exercises.user
+    ? _.mapValues(_.groupBy(state.exercises.user, "workoutStart"), (elist) =>
+        elist.map((exercise) => _.omit(exercise, "workoutStart"))
+      )
+    : [];
+
+  const groupedExercisesArray = Object.entries(ExercisesGroupedByWorkout);
+
+  const dateAndExerciseArray = groupedExercisesArray.map((w) => {
+    return { date: w[0], exercises: w[1] };
+  });
+
+  const sortedExerciseArray = dateAndExerciseArray.sort(
+    (a, b) => Date.parse(b.date) - Date.parse(a.date)
+  );
+  return sortedExerciseArray;
+};

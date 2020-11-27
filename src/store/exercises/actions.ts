@@ -22,7 +22,7 @@ import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
 
-export const getAllExercises = (): ThunkAction<
+export const getLoggedExercises = (): ThunkAction<
   void,
   RootState,
   unknown,
