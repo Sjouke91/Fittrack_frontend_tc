@@ -6,10 +6,17 @@ import Graph from "../../components/Dashboard/Graph/Graph";
 import WorkoutHistory from "../../components/Dashboard/WorkoutHistory/WorkoutHistory";
 import { getLoggedExercises } from "../../store/exercises/actions";
 import { selectAppLoading } from "../../store/appState/selectors";
+import { selectToken } from "../../store/user/selectors";
+import { Redirect } from "react-router-dom";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const state = useSelector(selectAppLoading);
+  const userWithToken = useSelector(selectToken);
+
+  if (!userWithToken) {
+    <Redirect to="/login" />;
+  }
 
   const [workoutId, set_workoutId] = useState(0);
 
