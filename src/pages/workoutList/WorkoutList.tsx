@@ -10,15 +10,12 @@ export default function Fitness() {
   const workouts = useSelector(selectUsersWorkouts);
   const dispatch = useDispatch();
 
-  console.log("this is workouts", workouts);
-
   useEffect(() => {
     dispatch(getUsersWorkouts());
   }, [dispatch]);
 
   const onClickDelete = (e: MouseEvent, workoutId: number) => {
     e.preventDefault();
-
     dispatch(deleteWorkout(workoutId));
   };
 
