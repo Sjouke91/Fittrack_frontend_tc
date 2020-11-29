@@ -4,15 +4,14 @@ import {
   appLoading,
   appDoneLoading,
   showMessageWithTimeout,
-  setMessage,
 } from "../appState/actions";
 import { selectToken } from "../user/selectors";
 import {
+  GET_ALL_EXERCISES,
   GET_WORKOUT_EXERCISES,
   GET_LOGGED_EXERCISES,
   GET_EXERCISES_BY_SEARCH,
   ExerciseActionTypes,
-  ExerciseState,
   ExercisesWithWorkout,
   Exercise,
   ExerciseSubmit,
@@ -21,6 +20,23 @@ import {
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
+
+export const getAllExercises = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  Action<string>
+> => async (dispatch, getState) => {
+  dispatch(appLoading);
+  try {
+    const res = await axios.get(`${apiUrl}/exercises`);
+    const exercises = res.data;
+    dispatch(allExercisesSucces(exercises));
+    dispatch(appDoneLoading);
+  } catch (e) {
+    console.log("ERROR:", e.message);
+  }
+};
 
 export const getLoggedExercises = (): ThunkAction<
   void,
@@ -34,7 +50,7 @@ export const getLoggedExercises = (): ThunkAction<
 
   dispatch(appLoading);
   try {
-    const res = await axios.get(`${apiUrl}/exercises`, {
+    const res = await axios.get(`${apiUrl}/exercises/logged`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const exercises = res.data;
@@ -139,4 +155,8 @@ const allExerciseOfUserSucces = (
   exercises: loggedExercise[]
 ): ExerciseActionTypes => {
   return { type: GET_LOGGED_EXERCISES, payload: exercises };
+};
+
+const allExercisesSucces = (exercises: Exercise[]): ExerciseActionTypes => {
+  return { type: GET_ALL_EXERCISES, payload: exercises };
 };

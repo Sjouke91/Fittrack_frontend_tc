@@ -2,6 +2,7 @@ export const GET_LOGGED_EXERCISES = "GET_LOGGED_EXERCISES";
 export const GET_EXERCISES_BY_SEARCH = "GET_EXERCISES_BY_SEARCH";
 export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
+export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
 
 export type Exercise = {
   id: number;
@@ -48,6 +49,11 @@ interface getExercisesBySearchAction {
   payload: Exercise[];
 }
 
+interface getAllExercisesAction {
+  type: typeof GET_ALL_EXERCISES;
+  payload: Exercise[];
+}
+
 interface getWorkoutExercisesAction {
   type: typeof GET_WORKOUT_EXERCISES;
   payload: ExercisesWithWorkout[];
@@ -67,12 +73,14 @@ export type ExerciseActionTypes =
   | getLoggedExercisesOfUser
   | getWorkoutExercisesAction
   | submitExerciseAction
-  | getExercisesBySearchAction;
+  | getExercisesBySearchAction
+  | getAllExercisesAction;
 
 export interface ExerciseState {
   exercises: {
     workout: ExercisesWithWorkout[];
     search: Exercise[];
     user: loggedExercise[];
+    all: Exercise[];
   };
 }

@@ -15,6 +15,8 @@ export const importWorkoutExercises = (state: ExerciseState) => {
   return exerciseArray;
 };
 
+export const selectAllExercises = (state: ExerciseState) => state.exercises.all;
+
 export const importSearchedExercises = (state: ExerciseState) =>
   state.exercises.search;
 
