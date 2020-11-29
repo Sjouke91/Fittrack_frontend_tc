@@ -1,12 +1,16 @@
 import "./Creator.scss";
 import React, { useEffect, useState, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getExercisesBySearch } from "../../store/exercises/actions";
+import {
+  getExercisesBySearch,
+  getAllExercises,
+} from "../../store/exercises/actions";
 import { importSearchedExercises } from "../../store/exercises/selectors";
 import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
 import { createWorkout } from "../../store/workouts/actions";
+import SelectedExList from "../../components/SelectedExList/SelectedExList";
 
 export default function Workout() {
   const allExercises = useSelector(importSearchedExercises);
@@ -21,6 +25,7 @@ export default function Workout() {
 
   useEffect(() => {
     dispatch(getMuscleGroups());
+    dispatch(getAllExercises());
   }, [dispatch]);
 
   const onClickSearch = (e: MouseEvent) => {
@@ -103,6 +108,7 @@ export default function Workout() {
           </Form.Group>
           <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
         </Form.Group>
+
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;
@@ -120,8 +126,14 @@ export default function Workout() {
           })}
         </div>
       </Form>
-      <div className="buttonParent">
-        <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
+
+      <div className="footer">
+        <div className="selectedList">
+          <SelectedExList exerciseList={addExercises} />
+        </div>
+        <div className="buttonParent">
+          <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
+        </div>
       </div>
     </div>
   );
