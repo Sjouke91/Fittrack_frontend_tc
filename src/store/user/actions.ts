@@ -43,7 +43,7 @@ export const signUp = (
   return async (dispatch) => {
     dispatch(appLoading());
     try {
-      const response = await axios.post(`${apiUrl}/signup`, {
+      const response = await axios.post(`${apiUrl}signup`, {
         name,
         email,
         password,
@@ -74,7 +74,7 @@ export const login = (
   return async (dispatch) => {
     dispatch(appLoading());
     try {
-      const response = await axios.post(`${apiUrl}/login`, {
+      const response = await axios.post(`${apiUrl}login`, {
         email,
         password,
       });
@@ -112,7 +112,7 @@ export const getUserWithStoredToken = (): ThunkAction<
     try {
       // if we do have a token,
       // check wether it is still valid or if it is expired
-      const response = await axios.get(`${apiUrl}/me`, {
+      const response = await axios.get(`${apiUrl}me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
