@@ -18,7 +18,7 @@ type Props = {
   workoutId: number;
 };
 
-export default function Graph(props: Props) {
+export default function ExerciseGraph(props: Props) {
   const { workoutId } = props;
   const allLoggedExercises = useSelector(SelectUserExercises);
   const [index, set_index] = useState(0);
