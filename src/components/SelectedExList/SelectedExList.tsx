@@ -23,7 +23,7 @@ export default function SelectedExList(props: SelectedEx) {
 
   useEffect(() => {
     listClosed
-      ? set_marginBottom(`${exerciseList.length * -35}px`)
+      ? set_marginBottom(`${exerciseList.length * -45}px`)
       : set_marginBottom("50px");
   }, [exerciseList, listClosed]);
 
