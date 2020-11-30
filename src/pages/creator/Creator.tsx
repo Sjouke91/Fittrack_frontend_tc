@@ -47,6 +47,7 @@ export default function Workout() {
       return;
     }
     set_searchText("");
+    set_searchMuscleGroup("");
     dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
   };
 
@@ -99,6 +100,7 @@ export default function Workout() {
               onChange={(e) => {
                 set_searchMuscleGroup(e.target.value);
               }}
+              value={searchMuscleGroup}
             >
               <option>Pick a muscle group...</option>
               {allMuscleGroups.map((mg) => {

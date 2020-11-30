@@ -2,7 +2,7 @@ import "./SelectedExList.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectAllExercises } from "../../store/exercises/selectors";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 
 export type SelectedEx = {
   exerciseList: number[];
@@ -22,20 +22,35 @@ export default function SelectedExList(props: SelectedEx) {
 
   useEffect(() => {
     listClosed
-      ? set_marginBottom(`${exerciseList.length * -35 + 50}px`)
+      ? set_marginBottom(`${exerciseList.length * -35}px`)
       : set_marginBottom("50px");
   }, [exerciseList, listClosed]);
 
   return (
-    <div className="selectedExercises" style={{ marginBottom: marginBottom }}>
-      <Table striped bordered hover variant="dark" size="sm">
-        <tbody>
+    <div className="selectedExercises">
+      <div className="pullUpList">
+        <Button variant="danger" onClick={() => closeList()}>
+          {listClosed ? "▲" : "▼"}
+        </Button>
+      </div>
+
+      <Table
+        style={{ marginBottom: marginBottom }}
+        striped
+        bordered
+        hover
+        variant="dark"
+        size="sm"
+      >
+        {/* <tbody>
           <tr>
             <td colSpan={3}>
-              <button onClick={() => closeList()}>^</button>
+              <Button onClick={() => closeList()}>
+                {listClosed ? "▲" : "▼"}
+              </Button>
             </td>
           </tr>
-        </tbody>
+        </tbody> */}
         {exerciseList.map((e, i) => {
           const completeExercise = allExercises.find((ex) => ex.id === e);
 
