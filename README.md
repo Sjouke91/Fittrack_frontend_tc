@@ -51,3 +51,17 @@ git remote -v origin git@github.com:Sjouke91/Fittrack_frontend_tc.git
 > origin git@github.com:Sjouke91/Fittrack_frontend_tc.git (push)
 
 git remote set-url origin git@github.com:Sjouke91/Fittrack_frontend_tc.git
+
+const convertToArrayForGraph = (property: string) => {
+return sortedGroupedByExDate.map(([date, exercises]) => {
+let outputByDate: newObject = {};
+
+      exercises.forEach((exercise) => {
+        outputByDate[exercise.exercise.name] =
+          exercise[property as keyof loggedExercise];
+      });
+
+      return outputByDate;
+    });
+
+};

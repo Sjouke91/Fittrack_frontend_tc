@@ -21,6 +21,7 @@
     "@types/recharts": "^1.8.16",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "bootstrap-switch-button-react": "^1.2.0",
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import "./Dashboard.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Calendar from "../../components/Dashboard/Calendar/Calendar";
-import Graph from "../../components/Dashboard/Graph/Graph";
 import WorkoutHistory from "../../components/Dashboard/WorkoutHistory/WorkoutHistory";
 import { getLoggedExercises } from "../../store/exercises/actions";
 import { selectAppLoading } from "../../store/appState/selectors";
 import { selectToken } from "../../store/user/selectors";
 import { Redirect } from "react-router-dom";
+import WorkoutGraph from "../../components/Dashboard/Graph/WorkoutGraph";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import ExerciseGraph from "../../components/Dashboard/Graph/ExerciseGraph";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const state = useSelector(selectAppLoading);
   const userWithToken = useSelector(selectToken);
+  const [graphType, set_graphType] = useState(true);
 
   if (!userWithToken) {
     <Redirect to="/login" />;
@@ -21,6 +24,7 @@ export default function Dashboard() {
   const [workoutId, set_workoutId] = useState(0);
 
   useEffect(() => {
+    console.log("this is run");
     dispatch(getLoggedExercises());
   }, [dispatch]);
 
@@ -47,7 +51,18 @@ export default function Dashboard() {
           </div>
           <div className="dashboardComponent">
             <h5>Graph feature</h5>
-            <Graph workoutId={workoutId} />
+            <BootstrapSwitchButton
+              checked={true}
+              onstyle="dark"
+              onlabel="Exercise"
+              offlabel="Workout"
+              onChange={() => set_graphType(!graphType)}
+            />
+            {graphType ? (
+              <ExerciseGraph workoutId={workoutId} />
+            ) : (
+              <WorkoutGraph workoutId={workoutId} />
+            )}
           </div>
         </div>
       )}
