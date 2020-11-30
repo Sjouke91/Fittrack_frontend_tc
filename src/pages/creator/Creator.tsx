@@ -87,7 +87,7 @@ export default function Workout() {
 
         <Form.Group className="formSearch" controlId="formSearch">
           <Form.Group className="searchOption" controlId="formSearchText">
-            <Form.Label>Search by name</Form.Label>
+            <Form.Label>By name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Exercise name"
@@ -99,7 +99,7 @@ export default function Workout() {
             className="searchOption"
             controlId="exampleForm.ControlSelect1"
           >
-            <Form.Label>Pick muscle group</Form.Label>
+            <Form.Label>By muscle group</Form.Label>
             <Form.Control
               as="select"
               onChange={(e) => {
