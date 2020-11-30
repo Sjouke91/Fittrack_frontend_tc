@@ -1,15 +1,16 @@
 import "./SelectedExList.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { useSelector } from "react-redux";
 import { selectAllExercises } from "../../store/exercises/selectors";
 import { Table, Button } from "react-bootstrap";
 
 export type SelectedEx = {
   exerciseList: number[];
+  addExercises: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export default function SelectedExList(props: SelectedEx) {
-  const { exerciseList } = props;
+  const { exerciseList, addExercises } = props;
   const allExercises = useSelector(selectAllExercises);
   const [marginBottom, set_marginBottom] = useState("50px");
   const [listClosed, set_listClosed] = useState(true);
@@ -25,6 +26,12 @@ export default function SelectedExList(props: SelectedEx) {
       ? set_marginBottom(`${exerciseList.length * -35}px`)
       : set_marginBottom("50px");
   }, [exerciseList, listClosed]);
+
+  const onClickDeleteEx = (e: MouseEvent, exerciseId: number | undefined) => {
+    e.preventDefault();
+    const newWorkoutArray = exerciseList.filter((eId) => eId !== exerciseId);
+    addExercises(newWorkoutArray);
+  };
 
   return (
     <div className="selectedExercises">
@@ -60,6 +67,11 @@ export default function SelectedExList(props: SelectedEx) {
                 <td>{i + 1}</td>
                 <td>{completeExercise?.name}</td>
                 <td>{completeExercise?.muscleGroup.name}</td>
+                <td>
+                  <button
+                    onClick={(e) => onClickDeleteEx(e, completeExercise?.id)}
+                  ></button>
+                </td>
               </tr>
             </tbody>
           );

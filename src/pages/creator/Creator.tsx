@@ -74,8 +74,8 @@ export default function Workout() {
       <div className="header">
         <h2>Create your workout!</h2>
       </div>
-      <Form>
-        <Form.Group controlId="formName">
+      <Form className="formField">
+        <Form.Group className="formName" controlId="formName">
           <Form.Label>Name of workout</Form.Label>
           <Form.Control
             type="text"
@@ -85,16 +85,21 @@ export default function Workout() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formSearchText">
-          <Form.Label>Search by name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Exercise name"
-            onChange={(e) => set_searchText(e.target.value.toLowerCase())}
-            value={searchText}
-          />
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Select muscle group</Form.Label>
+        <Form.Group className="formSearch" controlId="formSearch">
+          <Form.Group className="searchOption" controlId="formSearchText">
+            <Form.Label>Search by name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Exercise name"
+              onChange={(e) => set_searchText(e.target.value.toLowerCase())}
+              value={searchText}
+            />
+          </Form.Group>
+          <Form.Group
+            className="searchOption"
+            controlId="exampleForm.ControlSelect1"
+          >
+            <Form.Label>Pick muscle group</Form.Label>
             <Form.Control
               as="select"
               onChange={(e) => {
@@ -108,9 +113,8 @@ export default function Workout() {
               })}
             </Form.Control>
           </Form.Group>
-          <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
         </Form.Group>
-
+        <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;
@@ -131,7 +135,12 @@ export default function Workout() {
 
       <div className="footer">
         <div className="selectedList">
-          <SelectedExList exerciseList={addExercises} />
+          {addExercises.length ? (
+            <SelectedExList
+              exerciseList={addExercises}
+              addExercises={set_addExercises}
+            />
+          ) : null}
         </div>
         <div className="buttonParent">
           <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
