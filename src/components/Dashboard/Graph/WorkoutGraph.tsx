@@ -27,8 +27,6 @@ export default function WorkoutGraph(props: Props) {
 
   const exercisesOfDisplayedWorkout = allLoggedExercises[workoutId];
 
-  console.log("this is grouped", allLoggedExercises);
-
   const cleanDateExerciseArray = exercisesOfDisplayedWorkout
     ? exercisesOfDisplayedWorkout.map((e) => {
         let shortDate = new Date(e.createdAt).toDateString();
@@ -48,8 +46,6 @@ export default function WorkoutGraph(props: Props) {
     return dateA.getTime() - dateB.getTime();
   });
 
-  console.log("this is grouped", groupedByExDate);
-
   interface newObject {
     [key: string]: any;
   }
@@ -59,7 +55,6 @@ export default function WorkoutGraph(props: Props) {
   //   { ex1: 10, ex2: 14, ex3: 16 }, // 7/10/20
   //   { ex1: 8, ex2: 14, ex3: 16 }, // 8/10/20
   // ];
-
   const convertToArrayForGraph = (property: string) => {
     return sortedGroupedByExDate.map(([date, exercises]) => {
       let outputByDate: newObject = {};
@@ -75,13 +70,7 @@ export default function WorkoutGraph(props: Props) {
 
   const weightArray = convertToArrayForGraph(selectGraphInput);
 
-  console.log("weightArray", weightArray);
-
   const nameData = weightArray.length ? Object.keys(weightArray[1]) : [];
-
-  console.log("Namedata", nameData);
-
-  console.log("select", selectGraphInput);
 
   return (
     <div className="graphComponent">
@@ -103,7 +92,7 @@ export default function WorkoutGraph(props: Props) {
           </Form.Control>
         </Form.Group>
       </Form>
-      <ResponsiveContainer width="95%" height={220}>
+      <ResponsiveContainer width="100%" height={250}>
         <LineChart
           data={weightArray}
           margin={{ top: 5, right: 20, bottom: 5, left: 0 }}

@@ -10,6 +10,7 @@ import { Redirect } from "react-router-dom";
 import WorkoutGraph from "../../components/Dashboard/Graph/WorkoutGraph";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import ExerciseGraph from "../../components/Dashboard/Graph/ExerciseGraph";
+import Switches from "../../components/Switch";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -50,14 +51,12 @@ export default function Dashboard() {
             <WorkoutHistory updateWorkoutId={updateWorkoutId} />
           </div>
           <div className="dashboardComponent">
-            <h5>Graph feature</h5>
-            <BootstrapSwitchButton
-              checked={true}
-              onstyle="dark"
-              onlabel="Exercise"
-              offlabel="Workout"
-              onChange={() => set_graphType(!graphType)}
-            />
+            <div className="graphTitle">
+              <h5>Graph feature </h5>
+              <div className="graphSwitch">
+                <Switches graphType={graphType} setGraph={set_graphType} />
+              </div>
+            </div>
             {graphType ? (
               <ExerciseGraph workoutId={workoutId} />
             ) : (

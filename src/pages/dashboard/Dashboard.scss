@@ -15,4 +15,16 @@
       font-size: 28px;
     }
   }
+  .graphTitle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    .graphSwitch {
+      position: absolute;
+      display: flex;
+      right: 20%;
+      top: -5px;
+    }
+  }
 }
