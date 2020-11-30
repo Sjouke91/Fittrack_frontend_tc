@@ -1,7 +1,20 @@
 .selectedExercises {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  .pullUpList {
+    position: fixed;
+
+    right: 40px;
+    bottom: 80px;
+    width: 40px;
+  }
   button {
-    border: none;
-    background-color: rgba(255, 0, 0, 0);
-    color: white;
+    width: 40px;
+    z-index: 2;
+  }
+  Table {
+    width: 100vw;
   }
 }

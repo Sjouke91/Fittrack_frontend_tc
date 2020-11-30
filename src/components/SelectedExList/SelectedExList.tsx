@@ -1,15 +1,16 @@
 import "./SelectedExList.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { useSelector } from "react-redux";
 import { selectAllExercises } from "../../store/exercises/selectors";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 
 export type SelectedEx = {
   exerciseList: number[];
+  addExercises: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export default function SelectedExList(props: SelectedEx) {
-  const { exerciseList } = props;
+  const { exerciseList, addExercises } = props;
   const allExercises = useSelector(selectAllExercises);
   const [marginBottom, set_marginBottom] = useState("50px");
   const [listClosed, set_listClosed] = useState(true);
@@ -22,20 +23,32 @@ export default function SelectedExList(props: SelectedEx) {
 
   useEffect(() => {
     listClosed
-      ? set_marginBottom(`${exerciseList.length * -35 + 50}px`)
+      ? set_marginBottom(`${exerciseList.length * -35}px`)
       : set_marginBottom("50px");
   }, [exerciseList, listClosed]);
 
+  const onClickDeleteEx = (e: MouseEvent, exerciseId: number | undefined) => {
+    e.preventDefault();
+    const newWorkoutArray = exerciseList.filter((eId) => eId !== exerciseId);
+    addExercises(newWorkoutArray);
+  };
+
   return (
-    <div className="selectedExercises" style={{ marginBottom: marginBottom }}>
-      <Table striped bordered hover variant="dark" size="sm">
-        <tbody>
-          <tr>
-            <td colSpan={3}>
-              <button onClick={() => closeList()}>^</button>
-            </td>
-          </tr>
-        </tbody>
+    <div className="selectedExercises">
+      <div className="pullUpList">
+        <Button variant="danger" onClick={() => closeList()}>
+          {listClosed ? "▲" : "▼"}
+        </Button>
+      </div>
+
+      <Table
+        style={{ marginBottom: marginBottom }}
+        striped
+        bordered
+        hover
+        variant="dark"
+        size="sm"
+      >
         {exerciseList.map((e, i) => {
           const completeExercise = allExercises.find((ex) => ex.id === e);
 
@@ -45,6 +58,16 @@ export default function SelectedExList(props: SelectedEx) {
                 <td>{i + 1}</td>
                 <td>{completeExercise?.name}</td>
                 <td>{completeExercise?.muscleGroup.name}</td>
+                <td>
+                  <Button
+                    size="sm"
+                    variant="light"
+                    className="deleteButton"
+                    onClick={(e) => onClickDeleteEx(e, completeExercise?.id)}
+                  >
+                    -
+                  </Button>
+                </td>
               </tr>
             </tbody>
           );
