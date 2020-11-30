@@ -123,10 +123,12 @@ export default function Workout() {
               : "exerciseCard";
 
             return (
-              <button key={i} onClick={(e) => onClickSelect(e, exerciseId)}>
-                <div className={exerciseSelected}>
-                  <p>{e.name}</p>
-                </div>
+              <button
+                className={exerciseSelected}
+                key={i}
+                onClick={(e) => onClickSelect(e, exerciseId)}
+              >
+                {e.name}
               </button>
             );
           })}

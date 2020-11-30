@@ -49,15 +49,6 @@ export default function SelectedExList(props: SelectedEx) {
         variant="dark"
         size="sm"
       >
-        {/* <tbody>
-          <tr>
-            <td colSpan={3}>
-              <Button onClick={() => closeList()}>
-                {listClosed ? "▲" : "▼"}
-              </Button>
-            </td>
-          </tr>
-        </tbody> */}
         {exerciseList.map((e, i) => {
           const completeExercise = allExercises.find((ex) => ex.id === e);
 
@@ -68,9 +59,14 @@ export default function SelectedExList(props: SelectedEx) {
                 <td>{completeExercise?.name}</td>
                 <td>{completeExercise?.muscleGroup.name}</td>
                 <td>
-                  <button
+                  <Button
+                    size="sm"
+                    variant="light"
+                    className="deleteButton"
                     onClick={(e) => onClickDeleteEx(e, completeExercise?.id)}
-                  ></button>
+                  >
+                    -
+                  </Button>
                 </td>
               </tr>
             </tbody>

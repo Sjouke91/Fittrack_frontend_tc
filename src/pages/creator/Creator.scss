@@ -38,38 +38,36 @@
     margin: 10px;
     justify-content: center;
 
-    button {
-      border: none;
-      background-color: rgba(0, 0, 0, 0);
-      height: 60px;
-    }
-
     .exerciseCard {
       width: 160px;
       height: 55px;
       margin: 2px;
       background-color: rgb(255, 255, 255);
-      box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
       border: 1px solid rgb(49, 49, 49);
       border-radius: 5px;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
 
-      p {
-        margin: 0;
+      button {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
       }
     }
     .exerciseCardSelected {
-      width: 180px;
+      width: 160px;
       height: 55px;
       margin: 2px;
-      margin-bottom: 60px;
       background-color: rgb(255, 255, 255);
-      box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
-      border: 3px solid rgb(49, 49, 49);
+      box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
+      border: 3px solid rgb(1, 76, 161);
       border-radius: 5px;
       align-items: center;
+      text-align: center;
 
-      p {
-        margin: 0;
+      button {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
       }
     }
   }
