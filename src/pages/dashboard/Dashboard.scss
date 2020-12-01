@@ -15,16 +15,41 @@
       font-size: 28px;
     }
   }
-  .graphTitle {
-    position: relative;
-    display: flex;
-    justify-content: center;
 
-    .graphSwitch {
-      position: absolute;
+  .calendarComp {
+    border: 2px solid rgb(240, 2, 2);
+    margin: 40px 10px;
+    padding: 5px;
+    // color: white;
+    // background-color: rgb(3, 109, 180);
+  }
+
+  .historyComp {
+    border: 2px solid blue;
+    margin: 40px 10px;
+    padding: 5px;
+    // color: white;
+    // background-color: rgb(3, 109, 180);
+  }
+
+  .graphComp {
+    border: 2px solid green;
+    margin: 40px 10px;
+    padding: 5px;
+    // color: white;
+    // background-color: rgb(3, 109, 180);
+
+    .graphTitle {
+      position: relative;
       display: flex;
-      right: 20%;
-      top: -5px;
+      justify-content: center;
+
+      .graphSwitch {
+        position: absolute;
+        display: flex;
+        right: 20%;
+        top: -5px;
+      }
     }
   }
 }

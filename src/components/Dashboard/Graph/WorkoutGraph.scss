@@ -1,0 +1,24 @@
+.graphComponent {
+  position: relative;
+
+  .selectOption {
+    height: 60px;
+    padding: 10px;
+    align-items: center;
+
+    .searchOption {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      .selectField {
+        width: 60%;
+        height: 2.2em;
+      }
+    }
+  }
+
+  .graph {
+    background-color: white;
+  }
+}

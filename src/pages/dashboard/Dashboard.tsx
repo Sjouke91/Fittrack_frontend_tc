@@ -41,26 +41,28 @@ export default function Dashboard() {
         <p>loading</p>
       ) : (
         <div>
-          <div className="dashboardComponent">
+          <div className="calendarComp">
             <h5>Calendar</h5>
             <Calendar />
           </div>
-          <div className="dashboardComponent">
+          <div className="historyComp">
             <h5>Workout History</h5>
             <WorkoutHistory updateWorkoutId={updateWorkoutId} />
           </div>
-          <div className="dashboardComponent">
+          <div className="graphComp">
             <div className="graphTitle">
-              <h5>Graph feature </h5>
+              <h5>Graph</h5>
               <div className="graphSwitch">
                 <Switches graphType={graphType} setGraph={set_graphType} />
               </div>
             </div>
-            {graphType ? (
-              <ExerciseGraph workoutId={workoutId} />
-            ) : (
-              <WorkoutGraph workoutId={workoutId} />
-            )}
+            <div className="graphType">
+              {graphType ? (
+                <ExerciseGraph workoutId={workoutId} />
+              ) : (
+                <WorkoutGraph workoutId={workoutId} />
+              )}
+            </div>
           </div>
         </div>
       )}

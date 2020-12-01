@@ -55,9 +55,15 @@ export const SelectLoggedExercises = (state: ExerciseState) => {
       )
     : [];
 
-  const groupedExercisesArray = Object.entries(ExercisesGroupedByWorkout);
+  const sortedGroupedByExDate = Object.entries(ExercisesGroupedByWorkout).sort(
+    (a, b) => {
+      const dateA = new Date(a[0]);
+      const dateB = new Date(b[0]);
+      return dateA.getTime() - dateB.getTime();
+    }
+  );
 
-  const dateAndExerciseArray = groupedExercisesArray.map((w) => {
+  const dateAndExerciseArray = sortedGroupedByExDate.map((w) => {
     return { date: w[0], exercises: w[1] };
   });
 

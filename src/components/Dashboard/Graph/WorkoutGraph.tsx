@@ -1,4 +1,4 @@
-import "./Graph.scss";
+import "./WorkoutGraph.scss";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { SelectUserExercises } from "../../../store/exercises/selectors";
@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { loggedExercise } from "../../../store/exercises/types";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 type Props = {
   workoutId: number;
@@ -70,53 +70,68 @@ export default function WorkoutGraph(props: Props) {
 
   const weightArray = convertToArrayForGraph(selectGraphInput);
 
+  const weightArrayWithDate = weightArray.map((a, i) => {
+    const date = sortedGroupedByExDate[i][0];
+    return { ...a, date };
+  });
+
   const nameData = weightArray.length ? Object.keys(weightArray[0]) : [];
 
   return (
     <div className="graphComponent">
-      <Form>
-        <Form.Group
-          className="searchOption"
-          controlId="exampleForm.ControlSelect1"
-        >
-          <Form.Control
-            as="select"
-            onChange={(e) => {
-              set_selectGraphInput(e.target.value);
-            }}
-            value={selectGraphInput}
+      <div className="selectOption">
+        <Form>
+          <Form.Group
+            className="searchOption"
+            controlId="exampleForm.ControlSelect1"
           >
-            <option value="kg">Weight</option>
-            <option value="sets">Sets</option>
-            <option value="reps">Repetitions</option>
-          </Form.Control>
-        </Form.Group>
-      </Form>
-      <ResponsiveContainer width="100%" height={250}>
-        <LineChart
-          data={weightArray}
-          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-        >
-          {nameData.map((e, i) => {
-            const lineColor = [
-              "#173F5F",
-              "#3CAEA3",
-              "#ED553B",
-              "#20639B",
-              "#173F5F",
-              "#3CAEA3",
-              "#ED553B",
-            ];
-            return (
-              <Line key={i} type="monotone" dataKey={e} stroke={lineColor[i]} />
-            );
-          })}
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <XAxis dataKey="createdAt" />
-          <YAxis />
-          <Tooltip />
-        </LineChart>
-      </ResponsiveContainer>
+            <Form.Control
+              className="selectField"
+              as="select"
+              onChange={(e) => {
+                set_selectGraphInput(e.target.value);
+              }}
+              value={selectGraphInput}
+            >
+              <option value="kg">Weight</option>
+              <option value="sets">Sets</option>
+              <option value="reps">Repetitions</option>
+            </Form.Control>
+          </Form.Group>
+        </Form>
+      </div>
+      <div className="graph">
+        <ResponsiveContainer width="100%" height={250}>
+          <LineChart
+            data={weightArrayWithDate}
+            margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+          >
+            {nameData.map((e, i) => {
+              const lineColor = [
+                "#173F5F",
+                "#3CAEA3",
+                "#ED553B",
+                "#20639B",
+                "#173F5F",
+                "#3CAEA3",
+                "#ED553B",
+              ];
+              return (
+                <Line
+                  key={i}
+                  type="monotone"
+                  dataKey={e}
+                  stroke={lineColor[i]}
+                />
+              );
+            })}
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

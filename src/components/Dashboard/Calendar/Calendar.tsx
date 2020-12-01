@@ -20,7 +20,7 @@ export default function Calendar() {
   return (
     <div className="calendarComponent">
       <Paper>
-        <Scheduler data={schedulerData} height={400} firstDayOfWeek={1}>
+        <Scheduler data={schedulerData} height={500} firstDayOfWeek={1}>
           <ViewState defaultCurrentDate={currentDate} />
           <MonthView />
           <Toolbar />
