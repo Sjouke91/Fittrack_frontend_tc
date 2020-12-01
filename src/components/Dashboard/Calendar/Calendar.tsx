@@ -6,20 +6,25 @@ import {
   Scheduler,
   Appointments,
   MonthView,
+  Toolbar,
+  DateNavigator,
+  TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { SelectUserWorkouts } from "../../../store/exercises/selectors";
 import "./Calendar.scss";
 
 export default function Calendar() {
-  const currentDate = new Date();
   const schedulerData = useSelector(SelectUserWorkouts);
 
   return (
     <div className="calendarComponent">
       <Paper>
         <Scheduler data={schedulerData} height={400} firstDayOfWeek={1}>
-          <ViewState currentDate={currentDate} />
-          <MonthView></MonthView>
+          <ViewState defaultCurrentDate="2020-07-27" />
+          <MonthView />
+          <Toolbar />
+          <DateNavigator />
+          <TodayButton />
           <Appointments />
         </Scheduler>
       </Paper>
