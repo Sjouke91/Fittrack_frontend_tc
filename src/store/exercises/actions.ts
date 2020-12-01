@@ -69,7 +69,6 @@ export const getExercisesBySearch = (
   dispatch,
   getState
 ) => {
-  console.log("Action");
   dispatch(appLoading);
   try {
     const res = await axios.get(
@@ -91,7 +90,6 @@ export const getWorkoutExercises = (
 ) => {
   dispatch(appLoading);
   try {
-    console.log("I got run", workoutId);
     const res = await axios.get(`${apiUrl}/exercises/${workoutId}`);
     const exercises = res.data;
     dispatch(workoutExerciseSucces(exercises));

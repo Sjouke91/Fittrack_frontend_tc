@@ -66,7 +66,6 @@ export const editWorkout = (
   dispatch,
   getState
 ) => {
-  console.log("got run", workoutId, exerciseArray);
   dispatch(appLoading);
   const token = selectToken(getState());
 

@@ -25,7 +25,6 @@ export default function Dashboard() {
   const [workoutId, set_workoutId] = useState(0);
 
   useEffect(() => {
-    console.log("this is run");
     dispatch(getLoggedExercises());
   }, [dispatch]);
 
