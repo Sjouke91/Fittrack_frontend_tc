@@ -1,0 +1,108 @@
+.SearchComponent {
+  border: 1px solid black;
+  margin: 10px 24px;
+  padding-top: 15px;
+  .header {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(224, 224, 224);
+    align-items: center;
+    height: 10vh;
+    h2 {
+      font-weight: 200;
+      font-size: 28px;
+    }
+  }
+  .formField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20px;
+    .formName {
+      width: 80vw;
+
+      padding: 10px;
+    }
+    .formSearch {
+      display: flex;
+      justify-content: space-evenly;
+
+      width: 80vw;
+      .searchOption {
+        width: 40vw;
+        margin: 0 10px;
+      }
+    }
+
+    .buttons {
+      Button {
+        width: 35vw;
+        margin: 0 10px;
+      }
+    }
+  }
+  .exerciseList {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    justify-content: center;
+
+    .exerciseCard {
+      width: 160px;
+      height: 55px;
+      margin: 2px;
+      border: 1px solid rgb(49, 49, 49);
+      border-radius: 5px;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+
+      button {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+      }
+    }
+
+    .exerciseCardSelected {
+      width: 160px;
+      height: 55px;
+      margin: 2px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
+      border: 3px solid rgb(1, 76, 161);
+      border-radius: 5px;
+      align-items: center;
+      text-align: center;
+
+      button {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+      }
+    }
+  }
+  .footer {
+    .selectedList {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 0;
+    }
+    .buttonParent {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: rgb(53, 53, 53);
+      color: white;
+      text-align: end;
+
+      Button {
+        height: 40px;
+        margin: 5px;
+        z-index: 1;
+      }
+    }
+  }
+}

@@ -14,13 +14,14 @@ import { SelectUserWorkouts } from "../../../store/exercises/selectors";
 import "./Calendar.scss";
 
 export default function Calendar() {
+  const currentDate = new Date();
   const schedulerData = useSelector(SelectUserWorkouts);
 
   return (
     <div className="calendarComponent">
       <Paper>
         <Scheduler data={schedulerData} height={400} firstDayOfWeek={1}>
-          <ViewState defaultCurrentDate="2020-07-27" />
+          <ViewState defaultCurrentDate={currentDate} />
           <MonthView />
           <Toolbar />
           <DateNavigator />

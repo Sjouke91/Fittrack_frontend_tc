@@ -13,6 +13,7 @@ export default function SelectedExList(props: SelectedEx) {
   const { exerciseList, addExercises } = props;
   const allExercises = useSelector(selectAllExercises);
   const [marginBottom, set_marginBottom] = useState("50px");
+  const [marginBottomButton, set_marginBottomButton] = useState("60px");
   const [listClosed, set_listClosed] = useState(true);
 
   useEffect(() => {}, [exerciseList]);
@@ -25,6 +26,9 @@ export default function SelectedExList(props: SelectedEx) {
     listClosed
       ? set_marginBottom(`${exerciseList.length * -45}px`)
       : set_marginBottom("50px");
+    !listClosed
+      ? set_marginBottomButton(`${exerciseList.length * 42 + 60}px`)
+      : set_marginBottomButton("60px");
   }, [exerciseList, listClosed]);
 
   const onClickDeleteEx = (e: MouseEvent, exerciseId: number | undefined) => {
@@ -35,7 +39,7 @@ export default function SelectedExList(props: SelectedEx) {
 
   return (
     <div className="selectedExercises">
-      <div className="pullUpList">
+      <div className="pullUpList" style={{ bottom: marginBottomButton }}>
         <Button variant="danger" onClick={() => closeList()}>
           {listClosed ? "▲" : "▼"}
         </Button>

@@ -1,6 +1,14 @@
 .exercisePage {
   margin-bottom: 80px;
 
+  .pullUpList {
+    position: fixed;
+
+    right: 10px;
+    bottom: 60px;
+    width: 40px;
+  }
+
   .header {
     display: flex;
     justify-content: center;
@@ -36,8 +44,8 @@
 
       .exerciseCard {
         background-color: rgb(255, 255, 255);
-        box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
-        border: 1px solid rgb(29, 29, 29);
+        box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
+        border: 1px solid rgb(121, 121, 121);
         border-radius: 5px;
         padding: 10px;
         margin: 20px 0px;
