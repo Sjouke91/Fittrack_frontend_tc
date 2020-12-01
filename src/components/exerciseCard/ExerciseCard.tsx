@@ -1,5 +1,9 @@
 import "./ExerciseCard.scss";
 import React from "react";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { useDispatch } from "react-redux";
+import { deleteExerciseFromWorkout } from "../../store/workouts/actions";
 
 type Props = {
   id: number;
@@ -10,13 +14,36 @@ type Props = {
 };
 
 export default function ExerciseCard(props: Props) {
-  const { name, index, exerciseId, setExState } = props;
+  const { id: workoutId, name, index, exerciseId, setExState } = props;
+  const dispatch = useDispatch();
+
+  const deleteExercise = { workoutId, exerciseId };
 
   return (
     <div className="exerciseInputCard">
       <div className="exerciseTitle">
         <p>{index + 1}</p>
         <p>{name}</p>
+        <button
+          onClick={(e) =>
+            confirmAlert({
+              title: "Confirm delete",
+              message: "Are you sure you want to delete this exercise.",
+              buttons: [
+                {
+                  label: "Yes",
+                  onClick: () =>
+                    dispatch(deleteExerciseFromWorkout(deleteExercise)),
+                },
+                {
+                  label: "No",
+                  onClick: () => null,
+                },
+              ],
+            })
+          }
+          className="deleteButton"
+        ></button>
       </div>
       <div className="exerciseInput">
         <input
