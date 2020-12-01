@@ -10,6 +10,7 @@ import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
 import { WorkoutActionTypes, Workout, GET_USERS_WORKOUTS } from "./types";
+import { getWorkoutExercises } from "../exercises/actions";
 
 const workoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
   return { type: GET_USERS_WORKOUTS, payload: workoutArray };
@@ -108,6 +109,7 @@ export const deleteExerciseFromWorkout = (
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    dispatch(getWorkoutExercises(workoutId));
     dispatch(appDoneLoading);
     dispatch(
       showMessageWithTimeout("success", false, "Exercise deleted!", 3000)
