@@ -21,7 +21,6 @@ export const getUsersWorkouts = (): ThunkAction<
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
-  console.log("Got run get workouts");
   dispatch(appLoading);
   const user = selectUser(getState());
   try {
@@ -73,13 +72,46 @@ export const editWorkout = (
   try {
     const res = await axios.post(
       `${apiUrl}/workouts/${workoutId}`,
-      { workoutId, exerciseArray },
+      { exerciseArray },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
     dispatch(appDoneLoading);
-    dispatch(showMessageWithTimeout("success", false, "Workout added!", 3000));
+    dispatch(
+      showMessageWithTimeout("success", false, "Exercise(s) added!", 3000)
+    );
+  } catch (e) {
+    console.log("ERROR:", e.message);
+  }
+};
+
+type deleteExercise = {
+  workoutId: number;
+  exerciseId: number;
+};
+
+export const deleteExerciseFromWorkout = (
+  deleteExercise: deleteExercise
+): ThunkAction<void, RootState, unknown, Action<string>> => async (
+  dispatch,
+  getState
+) => {
+  dispatch(appLoading);
+  const token = selectToken(getState());
+
+  try {
+    const { workoutId, exerciseId } = deleteExercise;
+    const res = await axios.delete(
+      `${apiUrl}/workouts/${workoutId}/${exerciseId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    dispatch(appDoneLoading);
+    dispatch(
+      showMessageWithTimeout("success", false, "Exercise deleted!", 3000)
+    );
   } catch (e) {
     console.log("ERROR:", e.message);
   }

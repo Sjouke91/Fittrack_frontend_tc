@@ -16,9 +16,22 @@
   }
   .exerciseTitle {
     border-bottom: 1px solid grey;
+    position: relative;
     display: flex;
+
     p {
       margin: 0 10px;
+    }
+    .deleteButton {
+      border: none;
+      position: absolute;
+      right: 0px;
+      height: 15px;
+      width: 15px;
+
+      border-radius: 50%;
+      background-color: rgb(224, 42, 42);
+      color: black;
     }
   }
   .exerciseInput {
