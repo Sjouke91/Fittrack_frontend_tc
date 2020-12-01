@@ -27,7 +27,7 @@ export default function SelectedExList(props: SelectedEx) {
       ? set_marginBottom(`${exerciseList.length * -45}px`)
       : set_marginBottom("50px");
     !listClosed
-      ? set_marginBottomButton(`${exerciseList.length * 42 + 60}px`)
+      ? set_marginBottomButton(`${exerciseList.length * 50 + 60}px`)
       : set_marginBottomButton("60px");
   }, [exerciseList, listClosed]);
 

@@ -1,4 +1,5 @@
 .creatorPage {
+  margin-bottom: 50px;
   .header {
     display: flex;
     justify-content: center;
@@ -39,10 +40,10 @@
     justify-content: center;
 
     .exerciseCard {
-      width: 160px;
-      height: 55px;
+      width: 95vw;
+      height: 4vh;
       margin: 2px;
-
+      background-color: rgb(255, 255, 255);
       border: 1px solid rgb(49, 49, 49);
       border-radius: 5px;
       align-items: center;
@@ -55,11 +56,11 @@
       }
     }
     .exerciseCardSelected {
-      width: 160px;
-      height: 55px;
+      width: 95vw;
+      height: 4vh;
       margin: 2px;
       background-color: rgb(255, 255, 255);
-      box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
+
       border: 3px solid rgb(1, 76, 161);
       border-radius: 5px;
       align-items: center;
