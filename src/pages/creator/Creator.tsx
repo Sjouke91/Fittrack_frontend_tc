@@ -12,6 +12,7 @@ import { Button, Form } from "react-bootstrap";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
 import { createWorkout } from "../../store/workouts/actions";
 import SelectedExList from "../../components/SelectedExList/SelectedExList";
+import { useHistory } from "react-router-dom";
 
 export default function Workout() {
   const allExercises = useSelector(importSearchedExercises);
@@ -23,6 +24,7 @@ export default function Workout() {
   );
   const [workoutName, set_workoutName] = useState("");
   const [addExercises, set_addExercises] = useState<number[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getMuscleGroups());
@@ -69,6 +71,7 @@ export default function Workout() {
     set_addExercises([]);
     set_workoutName("");
     set_searchText("");
+    history.push("/workouts");
   };
 
   return (
@@ -86,7 +89,7 @@ export default function Workout() {
             placeholder="Enter workoutname"
           />
         </Form.Group>
-
+        <h3>Search exercises</h3>
         <Form.Group className="formSearch" controlId="formSearch">
           <Form.Group className="searchOption" controlId="formSearchText">
             <Form.Label>By name</Form.Label>

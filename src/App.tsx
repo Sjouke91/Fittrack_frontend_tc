@@ -35,9 +35,15 @@ function App() {
         <Route exact path="/">
           {!userWithToken ? <Redirect to="/login" /> : <Dashboard />}
         </Route>
-        <Route exact path="/workouts" component={WorkoutList} />
-        <Route path="/workouts/:id" component={Workout} />
-        <Route path="/creator" component={Creator} />
+        <Route exact path="/workouts">
+          {!userWithToken ? <Redirect to="/login" /> : <WorkoutList />}
+        </Route>
+        <Route path="/workouts/:id">
+          {!userWithToken ? <Redirect to="/login" /> : <Workout />}
+        </Route>
+        <Route path="/creator">
+          {!userWithToken ? <Redirect to="/login" /> : <Creator />}
+        </Route>
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>

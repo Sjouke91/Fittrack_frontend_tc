@@ -1,6 +1,6 @@
 import "./Workout.scss";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getWorkoutExercises,
@@ -12,7 +12,6 @@ import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes, WorkoutState } from "../../modelTypes";
 import ExerciseCard from "../../components/exerciseCard/ExerciseCard";
 import SearchExercise from "../../components/SearchExercise/SearchExercise";
-import AddIcon from "@material-ui/icons/Add";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
@@ -23,6 +22,7 @@ export default function Workout() {
 
   const [workoutState, setWorkoutState] = useState<WorkoutState>([]);
   const [displaySearch, set_displaySearch] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,6 +59,7 @@ export default function Workout() {
 
   const onClickLogWorkout = () => {
     workoutState.map((w) => dispatch(submitExercise(w)));
+    history.push("/");
   };
 
   return (
@@ -89,7 +90,13 @@ export default function Workout() {
         </div>
 
         <div className="buttonParent">
-          <Button onClick={(e) => onClickLogWorkout()}>Finish workout</Button>
+          <Button
+            onClick={(e) => {
+              onClickLogWorkout();
+            }}
+          >
+            Finish workout
+          </Button>
         </div>
       </div>
       <div className="editWorkout">
