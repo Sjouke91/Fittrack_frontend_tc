@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getWorkoutExercises,
   submitExercise,
+  emptySearch,
 } from "../../store/exercises/actions";
 import { importWorkoutExercises } from "../../store/exercises/selectors";
 import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes, WorkoutState } from "../../modelTypes";
 import ExerciseCard from "../../components/exerciseCard/ExerciseCard";
+import SearchExercise from "../../components/SearchExercise/SearchExercise";
+import AddIcon from "@material-ui/icons/Add";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
@@ -19,10 +22,13 @@ export default function Workout() {
   const [workoutStart, set_workoutStart] = useState<Date | null>(null);
 
   const [workoutState, setWorkoutState] = useState<WorkoutState>([]);
+  const [displaySearch, set_displaySearch] = useState(false);
 
   useEffect(() => {
-    dispatch(getWorkoutExercises(workoutId));
-  }, [dispatch, workoutId]);
+    setTimeout(() => {
+      dispatch(getWorkoutExercises(workoutId));
+    }, 2500);
+  }, [dispatch, workoutId, displaySearch]);
 
   useEffect(() => {
     const state: ExerciseSubmit[] = allExercises.map((e) => {
@@ -38,7 +44,7 @@ export default function Workout() {
       return newObject;
     });
     setWorkoutState(state);
-  }, [allExercises, workoutStart]);
+  }, [allExercises, workoutStart, displaySearch, workoutId]);
 
   const setExState = (id: number, key: string, value: number) => {
     const newState = workoutState.map((e) => {
@@ -81,9 +87,31 @@ export default function Workout() {
             })
           )}
         </div>
+
         <div className="buttonParent">
           <Button onClick={(e) => onClickLogWorkout()}>Finish workout</Button>
         </div>
+      </div>
+      <div className="editWorkout">
+        {displaySearch ? (
+          <SearchExercise
+            displaySearchSetter={set_displaySearch}
+            workoutId={workoutId}
+          />
+        ) : null}
+      </div>
+      <div className="pullUpList">
+        {workoutStart ? (
+          <Button
+            variant="danger"
+            onClick={(e) => {
+              dispatch(emptySearch());
+              set_displaySearch(!displaySearch);
+            }}
+          >
+            {!displaySearch ? "✛" : "▼"}
+          </Button>
+        ) : null}
       </div>
     </div>
   );

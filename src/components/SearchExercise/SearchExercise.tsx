@@ -1,4 +1,4 @@
-import "./Creator.scss";
+import "./SearchExercise.scss";
 import React, { useEffect, useState, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,10 +10,16 @@ import { importSearchedExercises } from "../../store/exercises/selectors";
 import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
-import { createWorkout } from "../../store/workouts/actions";
-import SelectedExList from "../../components/SelectedExList/SelectedExList";
+import { editWorkout } from "../../store/workouts/actions";
+import SelectedExList from "../SelectedExList/SelectedExList";
+import { useParams } from "react-router-dom";
 
-export default function Workout() {
+type Props = {
+  workoutId: number;
+  displaySearchSetter: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function SearchExercise(props: Props) {
   const allExercises = useSelector(importSearchedExercises);
   const allMuscleGroups = useSelector(selectMuscleGroups);
   const dispatch = useDispatch();
@@ -21,8 +27,8 @@ export default function Workout() {
   const [searchMuscleGroup, set_searchMuscleGroup] = useState<string | number>(
     ""
   );
-  const [workoutName, set_workoutName] = useState("");
   const [addExercises, set_addExercises] = useState<number[]>([]);
+  const { workoutId, displaySearchSetter } = props;
 
   useEffect(() => {
     dispatch(getMuscleGroups());
@@ -47,9 +53,9 @@ export default function Workout() {
 
       return;
     }
+    dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
     set_searchText("");
     set_searchMuscleGroup("");
-    dispatch(getExercisesBySearch(searchMuscleGroup, searchText));
   };
 
   const onClickSelect = (e: MouseEvent, exerciseId: number) => {
@@ -62,31 +68,19 @@ export default function Workout() {
     set_addExercises(newWorkoutArray);
   };
 
-  const onClickAddWorkout = (e: MouseEvent) => {
+  const onClickAddExercises = (e: MouseEvent) => {
     e.preventDefault();
-    dispatch(createWorkout(workoutName, addExercises));
+    dispatch(editWorkout(workoutId, addExercises));
     dispatch(emptySearch());
+    displaySearchSetter(false);
     set_addExercises([]);
-    set_workoutName("");
     set_searchText("");
   };
 
   return (
-    <div className="creatorPage">
-      <div className="header">
-        <h2>Create your workout!</h2>
-      </div>
+    <div className="SearchComponent">
+      <h3>Add exercise</h3>
       <Form className="formField">
-        <Form.Group className="formName" controlId="formName">
-          <Form.Label>Name of workout</Form.Label>
-          <Form.Control
-            type="text"
-            onChange={(e) => set_workoutName(e.target.value)}
-            value={workoutName}
-            placeholder="Enter workoutname"
-          />
-        </Form.Group>
-
         <Form.Group className="formSearch" controlId="formSearch">
           <Form.Group className="searchOption" controlId="formSearchText">
             <Form.Label>By name</Form.Label>
@@ -116,7 +110,15 @@ export default function Workout() {
             </Form.Control>
           </Form.Group>
         </Form.Group>
-        <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
+
+        <div className="buttons">
+          <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
+          {addExercises.length ? (
+            <Button onClick={(e) => onClickAddExercises(e)}>
+              Add exercise(s)
+            </Button>
+          ) : null}
+        </div>
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;
@@ -136,20 +138,6 @@ export default function Workout() {
           })}
         </div>
       </Form>
-
-      <div className="footer">
-        <div className="selectedList">
-          {addExercises.length ? (
-            <SelectedExList
-              exerciseList={addExercises}
-              addExercises={set_addExercises}
-            />
-          ) : null}
-        </div>
-        <div className="buttonParent">
-          <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
-        </div>
-      </div>
     </div>
   );
 }

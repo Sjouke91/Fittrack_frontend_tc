@@ -1,5 +1,7 @@
-.creatorPage {
-  margin-bottom: 50px;
+.SearchComponent {
+  border-top: 1px solid black;
+  margin: 10px 24px;
+  padding-top: 15px;
   .header {
     display: flex;
     justify-content: center;
@@ -32,6 +34,13 @@
         margin: 0 10px;
       }
     }
+
+    .buttons {
+      Button {
+        width: 35vw;
+        margin: 0 10px;
+      }
+    }
   }
   .exerciseList {
     display: flex;
@@ -40,11 +49,11 @@
     justify-content: center;
 
     .exerciseCard {
-      width: 95vw;
+      width: 88vw;
       height: 4vh;
       margin: 2px;
-      background-color: rgb(255, 255, 255);
       border: 1px solid rgb(49, 49, 49);
+      background-color: rgb(255, 255, 255);
       border-radius: 5px;
       align-items: center;
       text-align: center;
@@ -55,12 +64,13 @@
         background-color: rgba(0, 0, 0, 0);
       }
     }
+
     .exerciseCardSelected {
-      width: 95vw;
+      width: 88vw;
       height: 4vh;
       margin: 2px;
       background-color: rgb(255, 255, 255);
-
+      box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
       border: 3px solid rgb(1, 76, 161);
       border-radius: 5px;
       align-items: center;

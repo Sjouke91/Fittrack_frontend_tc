@@ -13,7 +13,7 @@ export default function ExerciseCard(props: Props) {
   const { name, index, exerciseId, setExState } = props;
 
   return (
-    <div className="exerciseCard">
+    <div className="exerciseInputCard">
       <div className="exerciseTitle">
         <p>{index + 1}</p>
         <p>{name}</p>

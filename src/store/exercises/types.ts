@@ -3,6 +3,7 @@ export const GET_EXERCISES_BY_SEARCH = "GET_EXERCISES_BY_SEARCH";
 export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
 export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
+export const EMPTY_SEARCHED_EXERCISES = "EMPTY_SEARCHED_EXERCISES";
 
 export type Exercise = {
   id: number;
@@ -49,6 +50,10 @@ interface getExercisesBySearchAction {
   payload: Exercise[];
 }
 
+interface emptySearch {
+  type: typeof EMPTY_SEARCHED_EXERCISES;
+}
+
 interface getAllExercisesAction {
   type: typeof GET_ALL_EXERCISES;
   payload: Exercise[];
@@ -74,7 +79,8 @@ export type ExerciseActionTypes =
   | getWorkoutExercisesAction
   | submitExerciseAction
   | getExercisesBySearchAction
-  | getAllExercisesAction;
+  | getAllExercisesAction
+  | emptySearch;
 
 export interface ExerciseState {
   exercises: {

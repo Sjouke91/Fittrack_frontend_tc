@@ -1,5 +1,6 @@
 import {
   GET_ALL_EXERCISES,
+  EMPTY_SEARCHED_EXERCISES,
   GET_WORKOUT_EXERCISES,
   ExerciseActionTypes,
   GET_LOGGED_EXERCISES,
@@ -24,6 +25,8 @@ export default (state = initialState, action: ExerciseActionTypes) => {
       return { ...state, search: action.payload };
     case GET_ALL_EXERCISES:
       return { ...state, all: action.payload };
+    case EMPTY_SEARCHED_EXERCISES:
+      return { ...state, search: [] };
     default:
       return state;
   }

@@ -11,6 +11,7 @@ import {
   GET_WORKOUT_EXERCISES,
   GET_LOGGED_EXERCISES,
   GET_EXERCISES_BY_SEARCH,
+  EMPTY_SEARCHED_EXERCISES,
   ExerciseActionTypes,
   ExercisesWithWorkout,
   Exercise,
@@ -159,4 +160,8 @@ const allExerciseOfUserSucces = (
 
 const allExercisesSucces = (exercises: Exercise[]): ExerciseActionTypes => {
   return { type: GET_ALL_EXERCISES, payload: exercises };
+};
+
+export const emptySearch = (): ExerciseActionTypes => {
+  return { type: EMPTY_SEARCHED_EXERCISES };
 };

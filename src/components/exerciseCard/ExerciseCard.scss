@@ -1,16 +1,18 @@
-.exerciseCard {
-  background-color: rgb(255, 255, 255);
-  box-shadow: 2px 3px 10px -1px rgba(27, 27, 27, 0.75);
+.exerciseInputCard {
+  background-color: rgb(241, 241, 241);
+  box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
   border: 1px solid rgb(29, 29, 29);
   border-radius: 5px;
   padding: 10px;
   margin: 20px 0px;
+
   .allStats {
     display: flex;
   }
   p {
     display: flex;
     margin: 0 5px;
+    color: rgb(41, 41, 41);
   }
   .exerciseTitle {
     border-bottom: 1px solid grey;
@@ -22,6 +24,7 @@
   .exerciseInput {
     display: flex;
     justify-content: center;
+
     input {
       width: 75px;
       margin: 10px 5px;

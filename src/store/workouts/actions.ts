@@ -59,6 +59,32 @@ export const createWorkout = (
   }
 };
 
+export const editWorkout = (
+  workoutId: number,
+  exerciseArray: number[]
+): ThunkAction<void, RootState, unknown, Action<string>> => async (
+  dispatch,
+  getState
+) => {
+  console.log("got run", workoutId, exerciseArray);
+  dispatch(appLoading);
+  const token = selectToken(getState());
+
+  try {
+    const res = await axios.post(
+      `${apiUrl}/workouts/${workoutId}`,
+      { workoutId, exerciseArray },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    dispatch(appDoneLoading);
+    dispatch(showMessageWithTimeout("success", false, "Workout added!", 3000));
+  } catch (e) {
+    console.log("ERROR:", e.message);
+  }
+};
+
 export const deleteWorkout = (
   workoutId: number
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
