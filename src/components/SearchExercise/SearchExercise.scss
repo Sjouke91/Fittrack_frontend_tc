@@ -1,5 +1,5 @@
 .SearchComponent {
-  border: 1px solid black;
+  border-top: 1px solid black;
   margin: 10px 24px;
   padding-top: 15px;
   .header {
@@ -49,10 +49,11 @@
     justify-content: center;
 
     .exerciseCard {
-      width: 160px;
-      height: 55px;
+      width: 88vw;
+      height: 4vh;
       margin: 2px;
       border: 1px solid rgb(49, 49, 49);
+      background-color: rgb(255, 255, 255);
       border-radius: 5px;
       align-items: center;
       text-align: center;
@@ -65,8 +66,8 @@
     }
 
     .exerciseCardSelected {
-      width: 160px;
-      height: 55px;
+      width: 88vw;
+      height: 4vh;
       margin: 2px;
       background-color: rgb(255, 255, 255);
       box-shadow: 2px 3px 3px -1px rgba(27, 27, 27, 0.75);
