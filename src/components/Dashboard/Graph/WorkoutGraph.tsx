@@ -70,7 +70,7 @@ export default function WorkoutGraph(props: Props) {
 
   const weightArray = convertToArrayForGraph(selectGraphInput);
 
-  const nameData = weightArray.length ? Object.keys(weightArray[1]) : [];
+  const nameData = weightArray.length ? Object.keys(weightArray[0]) : [];
 
   return (
     <div className="graphComponent">
