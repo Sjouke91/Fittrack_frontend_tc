@@ -58,3 +58,13 @@ Check out my kanban [project board](https://github.com/users/Sjouke91/projects/1
 ---
 
 ## Native version comming soon!
+
+---
+
+### Wireframe & database model
+
+<img align="left" alt="DatabaseModel" width="100%" src="./images/Wireframes.jpg" />
+<img align="left" alt="DatabaseModel" width="100%" src="./images/DatabaseModel.jpg" />
+
+<br />
+<br />
