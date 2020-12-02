@@ -1,67 +1,60 @@
-# Getting Started with Create React App
+# Hi there, thanks for visiting my FITTRACK project!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What this app is about
 
-## Available Scripts
+This app is made for all the powerlifters, crossfitters and fitness addicts out there who want to track their progress. The app can be used to create and log your workouts and exercises. Compose a new workout with the 900+ exercises stored in the backend. Workout Done? Check the dashboard functionality and track your progress in easy to read graphs and tables.
+
+So what are you waiting for? create your own account on [Fittrack](https://fittrack.netlify.app/workouts)!
+
+This project is made during the Codaisseur code academy portfolio assessment weeks. In a timeframe of two weeks I've made both the client and a server.
+
+- Fittrack [Front End](https://github.com/Sjouke91/Fittrack_frontend_tc)
+- Fittrack [Back End](https://github.com/Sjouke91/fitTrack_backend)
+
+### Languages and Tools:
+
+<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />
+<img align="left" alt="HTML5" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />
+<img align="left" alt="CSS3" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png" />
+<img align="left" alt="Sass" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sass/sass.png" />
+<img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />
+<img align="left" alt="React" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
+<img align="left" alt="Node.js" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
+<img align="left" alt="Node.js" width="26px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" />
+
+<br />
+<br />
+
+---
+
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- `npm start`
+- `npm test`
+- `npm run build`
+- `npm run eject`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### User stories
 
-### `npm test`
+as a user:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- I want to be able to navigate through the pages.
+- I want to be able to sign up to the service.
+- I want to be able to login
+- I want to see a list of my previous workouts and optionally add a new workout.
+- I want to be able to start a workout and see my exercises.
+- I want to be able to give input (weight, sets, reps, RPE, comments) to my workouts and submit them.
+- I want to be able to compose a workout by adding exercises.
+- I want to be able to delete workouts
+- I want to get insight in my progress and previous workouts via a dashboard.
+- I want these workouts to be editable later.
 
-### `npm run build`
+Check out my kanban [project board](https://github.com/users/Sjouke91/projects/1) for a full overview of the project.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-git remote -v origin git@github.com:Sjouke91/Fittrack_frontend_tc.git
-
-> origin git@github.com:Sjouke91/To-do-list-tsx-app.git (fetch)
-> origin git@github.com:Sjouke91/Fittrack_frontend_tc.git (push)
-
-git remote set-url origin git@github.com:Sjouke91/Fittrack_frontend_tc.git
-
-const convertToArrayForGraph = (property: string) => {
-return sortedGroupedByExDate.map(([date, exercises]) => {
-let outputByDate: newObject = {};
-
-      exercises.forEach((exercise) => {
-        outputByDate[exercise.exercise.name] =
-          exercise[property as keyof loggedExercise];
-      });
-
-      return outputByDate;
-    });
-
-};
+## Native version comming soon!

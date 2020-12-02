@@ -23,8 +23,6 @@ export default function Timer({ duration, setTimer }) {
     );
   };
 
-  console.log(timerDone);
-
   const setTimerDone = () => {
     dispatch(showMessageWithTimeout("success", false, "Get ready!", 2000));
     set_timerDone(false);
