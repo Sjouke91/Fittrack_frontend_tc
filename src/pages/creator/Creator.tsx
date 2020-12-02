@@ -13,6 +13,8 @@ import { getMuscleGroups } from "../../store/muscleGroups/actions";
 import { createWorkout } from "../../store/workouts/actions";
 import SelectedExList from "../../components/SelectedExList/SelectedExList";
 import { useHistory } from "react-router-dom";
+import { selectAppLoading } from "../../store/appState/selectors";
+import Loading from "../../components/loading";
 
 export default function Workout() {
   const allExercises = useSelector(importSearchedExercises);
@@ -25,6 +27,7 @@ export default function Workout() {
   const [workoutName, set_workoutName] = useState("");
   const [addExercises, set_addExercises] = useState<number[]>([]);
   const history = useHistory();
+  const isLoading = useSelector(selectAppLoading);
 
   useEffect(() => {
     dispatch(getMuscleGroups());
@@ -79,6 +82,7 @@ export default function Workout() {
       <div className="header">
         <h2>Create your workout!</h2>
       </div>
+
       <Form className="formField">
         <Form.Group className="formName" controlId="formName">
           <Form.Label>Name of workout</Form.Label>
@@ -120,6 +124,7 @@ export default function Workout() {
           </Form.Group>
         </Form.Group>
         <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
+        {isLoading ? <Loading /> : null}
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;
@@ -150,7 +155,13 @@ export default function Workout() {
           ) : null}
         </div>
         <div className="buttonParent">
-          <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
+          {addExercises.length && workoutName ? (
+            <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
+          ) : (
+            <Button onClick={(e) => onClickAddWorkout(e)} disabled>
+              Add workout
+            </Button>
+          )}
         </div>
       </div>
     </div>

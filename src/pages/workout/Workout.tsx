@@ -12,6 +12,8 @@ import { Button } from "react-bootstrap";
 import { ExerciseSubmit, ParamTypes, WorkoutState } from "../../modelTypes";
 import ExerciseCard from "../../components/exerciseCard/ExerciseCard";
 import SearchExercise from "../../components/SearchExercise/SearchExercise";
+import { selectAppLoading } from "../../store/appState/selectors";
+import Loading from "../../components/loading";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
@@ -19,7 +21,7 @@ export default function Workout() {
   const dispatch = useDispatch();
   const allExercises = useSelector(importWorkoutExercises);
   const [workoutStart, set_workoutStart] = useState<Date | null>(null);
-
+  const isLoading = useSelector(selectAppLoading);
   const [workoutState, setWorkoutState] = useState<WorkoutState>([]);
   const [displaySearch, set_displaySearch] = useState(false);
   const history = useHistory();
@@ -69,6 +71,7 @@ export default function Workout() {
       </div>
       <div className="allExercises">
         <div className="exerciseList">
+          {isLoading ? <Loading /> : null}
           {!workoutStart ? (
             <Button onClick={() => set_workoutStart(new Date())}>
               Start workout

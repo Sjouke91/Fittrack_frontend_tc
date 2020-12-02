@@ -79,6 +79,9 @@ export const getExercisesBySearch = (
     dispatch(appDoneLoading);
   } catch (e) {
     console.log("ERROR:", e.message);
+    dispatch(
+      showMessageWithTimeout("danger", true, e.response.data.message, 3000)
+    );
   }
 };
 

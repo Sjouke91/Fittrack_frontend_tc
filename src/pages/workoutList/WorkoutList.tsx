@@ -5,9 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUsersWorkouts, deleteWorkout } from "../../store/workouts/actions";
 import { selectUsersWorkouts } from "../../store/workouts/selectors";
 import { Button } from "react-bootstrap";
+import { selectAppLoading } from "../../store/appState/selectors";
+import Loading from "../../components/loading";
 
 export default function Fitness() {
   const workouts = useSelector(selectUsersWorkouts);
+  const isLoading = useSelector(selectAppLoading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,6 +28,7 @@ export default function Fitness() {
       <div className="header">
         <h2>Previous workouts of user</h2>
       </div>
+      {isLoading ? <Loading /> : null}
       <div className="workoutList">
         {workouts.map((w) => {
           return (

@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.scss";
-
 import { Switch, Route, Redirect } from "react-router-dom";
 import Navigation from "./components/navigation";
 import Loading from "./components/loading";
 import MessageBox from "./components/messageBox";
 import SignUp from "./pages/signUp/SignUp";
 import Login from "./pages/login/Login";
-
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { selectToken } from "./store/user/selectors";
@@ -31,18 +29,19 @@ function App() {
       <Navigation />
       <MessageBox />
       {isLoading ? <Loading /> : null}
+      {userWithToken ? <Redirect to="/login" /> : null}
       <Switch>
         <Route exact path="/">
-          {!userWithToken ? <Redirect to="/login" /> : <Dashboard />}
+          <Dashboard />
         </Route>
         <Route exact path="/workouts">
-          {!userWithToken ? <Redirect to="/login" /> : <WorkoutList />}
+          <WorkoutList />
         </Route>
         <Route path="/workouts/:id">
-          {!userWithToken ? <Redirect to="/login" /> : <Workout />}
+          <Workout />
         </Route>
         <Route path="/creator">
-          {!userWithToken ? <Redirect to="/login" /> : <Creator />}
+          <Creator />
         </Route>
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />

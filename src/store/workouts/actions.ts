@@ -16,6 +16,7 @@ const workoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
   return { type: GET_USERS_WORKOUTS, payload: workoutArray };
 };
 
+//get all workouts of user
 export const getUsersWorkouts = (): ThunkAction<
   void,
   RootState,
@@ -34,6 +35,7 @@ export const getUsersWorkouts = (): ThunkAction<
   }
 };
 
+//create a new workout
 export const createWorkout = (
   workoutName: string,
   exerciseArray: number[]
@@ -45,7 +47,7 @@ export const createWorkout = (
   const token = selectToken(getState());
 
   try {
-    const res = await axios.post(
+    await axios.post(
       `${apiUrl}/workouts`,
       { workoutName, exerciseArray },
       {
@@ -56,6 +58,9 @@ export const createWorkout = (
     dispatch(showMessageWithTimeout("success", false, "Workout added!", 3000));
   } catch (e) {
     console.log("ERROR:", e.message);
+    dispatch(
+      showMessageWithTimeout("danger", false, e.response.data.message, 3000)
+    );
   }
 };
 
@@ -70,7 +75,7 @@ export const editWorkout = (
   const token = selectToken(getState());
 
   try {
-    const res = await axios.post(
+    await axios.post(
       `${apiUrl}/workouts/${workoutId}`,
       { exerciseArray },
       {
@@ -102,12 +107,9 @@ export const deleteExerciseFromWorkout = (
 
   try {
     const { workoutId, exerciseId } = deleteExercise;
-    const res = await axios.delete(
-      `${apiUrl}/workouts/${workoutId}/${exerciseId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    await axios.delete(`${apiUrl}/workouts/${workoutId}/${exerciseId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     dispatch(getWorkoutExercises(workoutId));
     dispatch(appDoneLoading);
     dispatch(
@@ -128,7 +130,7 @@ export const deleteWorkout = (
   const token = selectToken(getState());
 
   try {
-    const res = await axios.delete(`${apiUrl}/workouts/${workoutId}`, {
+    await axios.delete(`${apiUrl}/workouts/${workoutId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch(appDoneLoading);
