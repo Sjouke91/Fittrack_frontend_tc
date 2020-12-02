@@ -112,7 +112,7 @@ export default function SearchExercise(props: Props) {
         </Form.Group>
 
         <div className="buttons">
-          <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
+          <Button onClick={(e) => onClickSearch(e)}>Search</Button>
           {addExercises.length ? (
             <Button onClick={(e) => onClickAddExercises(e)}>
               Add exercise(s)

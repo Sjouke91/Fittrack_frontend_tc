@@ -7,6 +7,34 @@
     right: 10px;
     bottom: 60px;
     width: 40px;
+
+    button {
+      height: 40px;
+      width: 40px;
+    }
+  }
+  .footer {
+    width: 100%;
+    background-color: rgba(87, 87, 87, 0.685);
+    position: fixed;
+    z-index: 0;
+    bottom: 40px;
+    height: 70px;
+
+    .timerComponent {
+      display: flex;
+      position: fixed;
+      height: 40px;
+      left: 10px;
+      bottom: 60px;
+
+      input {
+        width: 70px;
+      }
+      button {
+        margin-right: 5px;
+      }
+    }
   }
 
   .header {
@@ -34,6 +62,7 @@
       background-color: rgb(53, 53, 53);
       color: white;
       text-align: end;
+      z-index: 1;
       Button {
         margin: 5px;
       }

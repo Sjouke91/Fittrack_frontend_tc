@@ -1,6 +1,6 @@
 import "./Workout.scss";
 import React, { useEffect, useState } from "react";
-import { useParams, Redirect, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getWorkoutExercises,
@@ -14,6 +14,8 @@ import ExerciseCard from "../../components/exerciseCard/ExerciseCard";
 import SearchExercise from "../../components/SearchExercise/SearchExercise";
 import { selectAppLoading } from "../../store/appState/selectors";
 import Loading from "../../components/loading";
+import Timer from "../../components/Timer/Timer";
+import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
@@ -25,6 +27,8 @@ export default function Workout() {
   const [workoutState, setWorkoutState] = useState<WorkoutState>([]);
   const [displaySearch, set_displaySearch] = useState(false);
   const history = useHistory();
+  const [setTimer, set_setTimer] = useState(false);
+  const [duration, set_duration] = useState(90);
 
   useEffect(() => {
     setTimeout(() => {
@@ -69,6 +73,7 @@ export default function Workout() {
       <div className="header">
         <h2>Good luck!</h2>
       </div>
+      {setTimer ? <Timer setTimer={set_setTimer} duration={duration} /> : null}
       <div className="allExercises">
         <div className="exerciseList">
           {isLoading ? <Loading /> : null}
@@ -110,6 +115,23 @@ export default function Workout() {
           />
         ) : null}
       </div>
+      {workoutStart ? (
+        <div className="footer">
+          <div className="timerComponent">
+            <Button variant="warning" onClick={(e) => set_setTimer(true)}>
+              <AccessAlarmIcon />
+            </Button>
+            <input
+              type="number"
+              placeholder="seconds"
+              onChange={(e) => {
+                set_duration(parseInt(e.target.value));
+              }}
+              required
+            ></input>
+          </div>
+        </div>
+      ) : null}
       <div className="pullUpList">
         {workoutStart ? (
           <Button

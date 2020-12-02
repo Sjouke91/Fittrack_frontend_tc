@@ -23,15 +23,13 @@
       margin: 0 10px;
     }
     .deleteButton {
-      border: none;
       position: absolute;
-      right: 0px;
+      border: none;
+      right: 10px;
       height: 15px;
       width: 15px;
-
-      border-radius: 50%;
-      background-color: rgb(224, 42, 42);
-      color: black;
+      background-color: none;
+      color: rgb(167, 0, 0);
     }
   }
   .exerciseInput {

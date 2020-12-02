@@ -7,6 +7,7 @@ import { selectUsersWorkouts } from "../../store/workouts/selectors";
 import { Button } from "react-bootstrap";
 import { selectAppLoading } from "../../store/appState/selectors";
 import Loading from "../../components/loading";
+import Timer from "../../components/Timer/Timer";
 
 export default function Fitness() {
   const workouts = useSelector(selectUsersWorkouts);
