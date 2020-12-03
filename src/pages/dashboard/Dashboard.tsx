@@ -18,8 +18,6 @@ export default function Dashboard() {
 
   const [workoutId, set_workoutId] = useState(0);
 
-  console.log("this is proces", process.env.REACT_APP_API_URL);
-
   useEffect(() => {
     dispatch(getLoggedExercises());
   }, [dispatch]);
