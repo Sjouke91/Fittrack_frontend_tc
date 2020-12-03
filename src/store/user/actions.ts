@@ -33,7 +33,12 @@ const tokenStillValid = (
   payload: userWithoutToken,
 });
 
-export const logOut = () => ({ type: LOG_OUT });
+export const logOut = (): UserActionTypes => {
+  localStorage.removeItem("token");
+  console.log("got run", localStorage.getItem("token"));
+
+  return { type: LOG_OUT };
+};
 
 export const signUp = (
   name: string,

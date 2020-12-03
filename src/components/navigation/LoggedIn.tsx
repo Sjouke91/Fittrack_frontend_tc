@@ -12,8 +12,8 @@ export default function LoggedIn() {
   const history = useHistory();
 
   const onClickLogOut = () => {
-    history.push("/login");
     dispatch(logOut());
+    return history.push("/login");
   };
 
   return (

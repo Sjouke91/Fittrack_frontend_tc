@@ -9,6 +9,8 @@ import WorkoutGraph from "../../components/Dashboard/Graph/WorkoutGraph";
 import ExerciseGraph from "../../components/Dashboard/Graph/ExerciseGraph";
 import Switches from "../../components/Switch";
 import Loading from "../../components/loading";
+import { selectToken } from "../../store/user/selectors";
+import { useHistory } from "react-router-dom";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -17,6 +19,15 @@ export default function Dashboard() {
   const [graphType, set_graphType] = useState(true);
 
   const [workoutId, set_workoutId] = useState(0);
+  const token = useSelector(selectToken);
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log("got run", token);
+    if (!token) {
+      history.push("/login");
+    }
+  }, [token, history]);
 
   useEffect(() => {
     dispatch(getLoggedExercises());

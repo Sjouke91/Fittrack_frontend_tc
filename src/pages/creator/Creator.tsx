@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import { selectAppLoading } from "../../store/appState/selectors";
 import Loading from "../../components/loading";
 
-export default function Workout() {
+export default function Creator() {
   const allExercises = useSelector(importSearchedExercises);
   const allMuscleGroups = useSelector(selectMuscleGroups);
   const dispatch = useDispatch();
