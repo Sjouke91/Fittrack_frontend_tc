@@ -24,7 +24,6 @@ export default function Dashboard() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("got run", token);
     if (!token) {
       history.push("/login");
     }

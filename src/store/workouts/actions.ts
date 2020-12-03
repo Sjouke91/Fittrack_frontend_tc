@@ -23,7 +23,6 @@ export const getUsersWorkouts = (): ThunkAction<
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
-  console.log("got run");
   dispatch(appLoading());
   const user = selectUser(getState());
   try {
