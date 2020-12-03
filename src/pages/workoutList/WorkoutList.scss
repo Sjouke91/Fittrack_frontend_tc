@@ -2,12 +2,13 @@
   .header {
     display: flex;
     justify-content: center;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(7, 70, 121);
     align-items: center;
     height: 8vh;
     h2 {
-      font-weight: 200;
+      font-weight: 300;
       font-size: 28px;
+      color: white;
     }
   }
   .workoutList {
@@ -25,10 +26,12 @@
       .workoutText {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: center;
         width: 400px;
-        border: 1px solid rgb(226, 226, 226);
-        border-radius: 10px;
+        border: 2px solid rgb(2, 78, 141);
+        color: rgb(46, 46, 46);
+        border-radius: 5px;
+        background-color: rgb(255, 255, 255);
 
         p {
           font-size: 16px;

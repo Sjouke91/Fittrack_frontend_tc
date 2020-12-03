@@ -27,7 +27,7 @@ export default function Fitness() {
   return (
     <div className="workoutPage">
       <div className="header">
-        <h2>Previous workouts of user</h2>
+        <h2>Previous workouts</h2>
       </div>
       {isLoading ? <Loading /> : null}
       <div className="workoutList">
@@ -57,7 +57,11 @@ export default function Fitness() {
                 <p>{`${w.name}`}</p>
               </div>
               <Link to={`/workouts/${w.id}`}>
-                <Button id="goButton" variant="outline-success">
+                <Button
+                  id="goButton"
+                  style={{ color: "white" }}
+                  variant="warning"
+                >
                   <svg
                     width="1em"
                     height="1em"
@@ -79,7 +83,9 @@ export default function Fitness() {
       </div>
       <div className="addWorkout">
         <Link to="/creator">
-          <Button id="button">Create workout</Button>
+          <Button variant="outline-warning" id="button">
+            Create workout
+          </Button>
         </Link>
       </div>
     </div>

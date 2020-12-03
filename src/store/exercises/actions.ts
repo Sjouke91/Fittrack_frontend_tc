@@ -28,12 +28,12 @@ export const getAllExercises = (): ThunkAction<
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
-  dispatch(appLoading);
+  dispatch(appLoading());
   try {
     const res = await axios.get(`${apiUrl}/exercises`);
     const exercises = res.data;
     dispatch(allExercisesSucces(exercises));
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
   } catch (e) {
     console.log("ERROR:", e.message);
   }
@@ -49,14 +49,14 @@ export const getLoggedExercises = (): ThunkAction<
 
   if (token === null) return;
 
-  dispatch(appLoading);
+  dispatch(appLoading());
   try {
     const res = await axios.get(`${apiUrl}/exercises/logged`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const exercises = res.data;
     dispatch(allExerciseOfUserSucces(exercises));
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
   } catch (e) {
     console.log("ERROR:", e.message);
   }
@@ -69,14 +69,14 @@ export const getExercisesBySearch = (
   dispatch,
   getState
 ) => {
-  dispatch(appLoading);
+  dispatch(appLoading());
   try {
     const res = await axios.get(
       `${apiUrl}/exercises/search?muscleGroupId=${muscleGroupId}&exerciseName=${exerciseName}`
     );
     const exercises = res.data;
     dispatch(exerciseSearchSucces(exercises));
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
   } catch (e) {
     console.log("ERROR:", e.message);
     dispatch(
@@ -91,12 +91,12 @@ export const getWorkoutExercises = (
   dispatch,
   getState
 ) => {
-  dispatch(appLoading);
+  dispatch(appLoading());
   try {
     const res = await axios.get(`${apiUrl}/exercises/${workoutId}`);
     const exercises = res.data;
     dispatch(workoutExerciseSucces(exercises));
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
   } catch (e) {
     console.log("ERROR:", e.message);
   }
@@ -117,7 +117,7 @@ export const submitExercise = ({
   Action<string>
 > => async (dispatch, getState) => {
   const token = selectToken(getState());
-  dispatch(appLoading);
+  dispatch(appLoading());
 
   try {
     await axios.post(
@@ -134,8 +134,8 @@ export const submitExercise = ({
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    dispatch(appDoneLoading);
-    dispatch(showMessageWithTimeout("success", true, "exercise logged", 2000));
+    dispatch(appDoneLoading());
+    dispatch(showMessageWithTimeout("warning", true, "exercise logged", 2000));
   } catch (e) {
     console.log(e);
     dispatch(

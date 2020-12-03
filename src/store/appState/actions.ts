@@ -10,7 +10,9 @@ import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
 
-export const appLoading = () => ({ type: APP_LOADING });
+export const appLoading = () => {
+  return { type: APP_LOADING };
+};
 export const appDoneLoading = () => ({ type: APP_DONE_LOADING });
 export const clearMessage = () => ({ type: CLEAR_MESSAGE });
 

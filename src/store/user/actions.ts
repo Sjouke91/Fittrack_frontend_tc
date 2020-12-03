@@ -35,8 +35,6 @@ const tokenStillValid = (
 
 export const logOut = (): UserActionTypes => {
   localStorage.removeItem("token");
-  console.log("got run", localStorage.getItem("token"));
-
   return { type: LOG_OUT };
 };
 
@@ -56,7 +54,7 @@ export const signUp = (
 
       dispatch(loginSuccess(response.data));
       dispatch(
-        showMessageWithTimeout("success", true, "account created", 2000)
+        showMessageWithTimeout("warning", true, "account created", 2000)
       );
       dispatch(appDoneLoading());
     } catch (error) {
@@ -85,7 +83,7 @@ export const login = (
       });
 
       dispatch(loginSuccess(response.data));
-      dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
+      dispatch(showMessageWithTimeout("warning", false, "welcome back!", 1500));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

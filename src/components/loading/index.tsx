@@ -4,10 +4,13 @@ import "./spinner.scss";
 
 export default function Loading() {
   return (
-    <div className="loading_spinner">
-      <Spinner animation="border" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
+    <div>
+      <div className="header"></div>
+      <div className="loading_spinner">
+        <Spinner animation="border" variant="warning">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
     </div>
   );
 }

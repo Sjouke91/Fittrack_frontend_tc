@@ -16,6 +16,8 @@ import { selectAppLoading } from "../../store/appState/selectors";
 import Loading from "../../components/loading";
 import Timer from "../../components/Timer/Timer";
 import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
+import { confirmAlert } from "react-confirm-alert";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Workout() {
   const { id } = useParams<ParamTypes>();
@@ -33,7 +35,7 @@ export default function Workout() {
   useEffect(() => {
     setTimeout(() => {
       dispatch(getWorkoutExercises(workoutId));
-    }, 2500);
+    });
   }, [dispatch, workoutId, displaySearch]);
 
   useEffect(() => {
@@ -73,12 +75,20 @@ export default function Workout() {
       <div className="header">
         <h2>Good luck!</h2>
       </div>
+      {/* {isLoading ? (
+        <div className="loading_spinner">
+          <Spinner animation="border" variant="warning" />
+        </div>
+      ) : null} */}
       {setTimer ? <Timer setTimer={set_setTimer} duration={duration} /> : null}
       <div className="allExercises">
         <div className="exerciseList">
-          {isLoading ? <Loading /> : null}
           {!workoutStart ? (
-            <Button onClick={() => set_workoutStart(new Date())}>
+            <Button
+              variant="warning"
+              style={{ color: "white", alignSelf: "center" }}
+              onClick={() => set_workoutStart(new Date())}
+            >
               Start workout
             </Button>
           ) : (
@@ -99,8 +109,22 @@ export default function Workout() {
 
         <div className="buttonParent">
           <Button
+            variant="outline-warning"
             onClick={(e) => {
-              onClickLogWorkout();
+              confirmAlert({
+                title: "Confirm submit",
+                message: "Are you sure you want to submit",
+                buttons: [
+                  {
+                    label: "Yes",
+                    onClick: () => onClickLogWorkout(),
+                  },
+                  {
+                    label: "No",
+                    onClick: () => null,
+                  },
+                ],
+              });
             }}
           >
             Finish workout
@@ -123,7 +147,7 @@ export default function Workout() {
             </Button>
             <input
               type="number"
-              placeholder="seconds"
+              placeholder="sec."
               min={0}
               onChange={(e) => {
                 set_duration(parseInt(e.target.value));
@@ -136,7 +160,7 @@ export default function Workout() {
       <div className="pullUpList">
         {workoutStart ? (
           <Button
-            variant="danger"
+            variant="outline-warning"
             onClick={(e) => {
               dispatch(emptySearch());
               set_displaySearch(!displaySearch);

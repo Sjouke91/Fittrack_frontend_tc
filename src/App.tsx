@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <Navigation />
       <MessageBox />
-      {isLoading ? <Loading /> : null}
+      {/* {isLoading ? <Loading /> : null} */}
       {userWithToken ? <Redirect to="/login" /> : null}
       <Switch>
         <Route exact path="/">

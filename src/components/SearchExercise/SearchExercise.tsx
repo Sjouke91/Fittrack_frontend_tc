@@ -11,8 +11,8 @@ import { selectMuscleGroups } from "../../store/muscleGroups/selectors";
 import { Button, Form } from "react-bootstrap";
 import { getMuscleGroups } from "../../store/muscleGroups/actions";
 import { editWorkout } from "../../store/workouts/actions";
-import SelectedExList from "../SelectedExList/SelectedExList";
-import { useParams } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
+import { selectAppLoading } from "../../store/appState/selectors";
 
 type Props = {
   workoutId: number;
@@ -29,6 +29,7 @@ export default function SearchExercise(props: Props) {
   );
   const [addExercises, set_addExercises] = useState<number[]>([]);
   const { workoutId, displaySearchSetter } = props;
+  const isLoading = useSelector(selectAppLoading);
 
   useEffect(() => {
     dispatch(getMuscleGroups());
@@ -112,13 +113,28 @@ export default function SearchExercise(props: Props) {
         </Form.Group>
 
         <div className="buttons">
-          <Button onClick={(e) => onClickSearch(e)}>Search</Button>
+          <Button
+            style={{ color: "white" }}
+            variant="warning"
+            onClick={(e) => onClickSearch(e)}
+          >
+            Search
+          </Button>
           {addExercises.length ? (
-            <Button onClick={(e) => onClickAddExercises(e)}>
+            <Button
+              style={{ color: "white" }}
+              variant="warning"
+              onClick={(e) => onClickAddExercises(e)}
+            >
               Add exercise(s)
             </Button>
           ) : null}
         </div>
+        {isLoading ? (
+          <div className="loading_spinner">
+            <Spinner animation="border" variant="warning" />
+          </div>
+        ) : null}
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;

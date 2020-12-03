@@ -19,11 +19,11 @@ export const getMuscleGroups = (): ThunkAction<
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
-  dispatch(appLoading);
+  dispatch(appLoading());
   try {
     const res = await axios.get(`${apiUrl}/muscleGroups`);
     const muscleGroupArray: MuscleGroup[] = res.data;
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
     dispatch(FetchMuscleGroupSucces(muscleGroupArray));
   } catch (e) {
     console.log("ERROR:", e.message);

@@ -1,10 +1,15 @@
 .loading_spinner {
-  z-index: 9999;
+  // z-index: 2;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  background-color: white;
+  // position: fixed;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0);
+  height: 10vh;
 }

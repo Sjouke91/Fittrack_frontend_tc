@@ -1,3 +1,4 @@
+import "./LoggedIn.scss";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../store/user/actions";
@@ -18,8 +19,22 @@ export default function LoggedIn() {
 
   return (
     <>
-      <Nav.Item style={{ padding: ".5rem 1rem" }}>{user.email}</Nav.Item>
-      <Button onClick={() => onClickLogOut()}>Logout</Button>
+      <Nav.Item
+        style={{
+          padding: ".5rem 1rem",
+          color: "grey",
+        }}
+      >
+        {user.email}
+      </Nav.Item>
+      <Button
+        size="sm"
+        variant="outline-warning"
+        className="button"
+        onClick={() => onClickLogOut()}
+      >
+        Log out
+      </Button>
     </>
   );
 }

@@ -23,11 +23,12 @@ export const getUsersWorkouts = (): ThunkAction<
   unknown,
   Action<string>
 > => async (dispatch, getState) => {
-  dispatch(appLoading);
+  console.log("got run");
+  dispatch(appLoading());
   const user = selectUser(getState());
   try {
     const res = await axios.get(`${apiUrl}/workouts/${user.id}`);
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
     const workoutArray: Workout[] = res.data;
     dispatch(workoutToState(workoutArray));
   } catch (e) {
@@ -43,7 +44,7 @@ export const createWorkout = (
   dispatch,
   getState
 ) => {
-  dispatch(appLoading);
+  dispatch(appLoading());
   const token = selectToken(getState());
 
   try {
@@ -54,8 +55,8 @@ export const createWorkout = (
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    dispatch(appDoneLoading);
-    dispatch(showMessageWithTimeout("success", false, "Workout added!", 3000));
+    dispatch(appDoneLoading());
+    dispatch(showMessageWithTimeout("warning", false, "Workout added!", 3000));
   } catch (e) {
     console.log("ERROR:", e.message);
     dispatch(
@@ -64,6 +65,7 @@ export const createWorkout = (
   }
 };
 
+// add exercise to workout
 export const editWorkout = (
   workoutId: number,
   exerciseArray: number[]
@@ -84,7 +86,7 @@ export const editWorkout = (
     );
     dispatch(appDoneLoading);
     dispatch(
-      showMessageWithTimeout("success", false, "Exercise(s) added!", 3000)
+      showMessageWithTimeout("warning", false, "Exercise(s) added!", 3000)
     );
   } catch (e) {
     console.log("ERROR:", e.message);
@@ -111,15 +113,16 @@ export const deleteExerciseFromWorkout = (
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch(getWorkoutExercises(workoutId));
-    dispatch(appDoneLoading);
+    dispatch(appDoneLoading());
     dispatch(
-      showMessageWithTimeout("success", false, "Exercise deleted!", 3000)
+      showMessageWithTimeout("warning", false, "Exercise deleted!", 3000)
     );
   } catch (e) {
     console.log("ERROR:", e.message);
   }
 };
 
+// delete workout
 export const deleteWorkout = (
   workoutId: number
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
@@ -136,7 +139,7 @@ export const deleteWorkout = (
     dispatch(appDoneLoading);
     dispatch(getUsersWorkouts());
     dispatch(
-      showMessageWithTimeout("success", false, "Workout deleted!", 3000)
+      showMessageWithTimeout("warning", false, "Workout deleted!", 3000)
     );
   } catch (e) {
     console.log("ERROR:", e.message);

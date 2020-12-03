@@ -40,7 +40,11 @@ export default function SelectedExList(props: SelectedEx) {
   return (
     <div className="selectedExercises">
       <div className="pullUpList" style={{ bottom: marginBottomButton }}>
-        <Button variant="danger" onClick={() => closeList()}>
+        <Button
+          style={{ color: "white" }}
+          variant="danger"
+          onClick={() => closeList()}
+        >
           {listClosed ? "▲" : "▼"}
         </Button>
       </div>
@@ -65,7 +69,7 @@ export default function SelectedExList(props: SelectedEx) {
                 <td>
                   <Button
                     size="sm"
-                    variant="light"
+                    variant="outline-warning"
                     className="deleteButton"
                     onClick={(e) => onClickDeleteEx(e, completeExercise?.id)}
                   >

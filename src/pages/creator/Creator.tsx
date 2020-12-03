@@ -15,6 +15,7 @@ import SelectedExList from "../../components/SelectedExList/SelectedExList";
 import { useHistory } from "react-router-dom";
 import { selectAppLoading } from "../../store/appState/selectors";
 import Loading from "../../components/loading";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Creator() {
   const allExercises = useSelector(importSearchedExercises);
@@ -85,7 +86,9 @@ export default function Creator() {
 
       <Form className="formField">
         <Form.Group className="formName" controlId="formName">
-          <Form.Label>Name of workout</Form.Label>
+          <Form.Label>
+            <h4 style={{ fontWeight: 300 }}>Name of workout</h4>
+          </Form.Label>
           <Form.Control
             type="text"
             onChange={(e) => set_workoutName(e.target.value)}
@@ -93,7 +96,7 @@ export default function Creator() {
             placeholder="Enter workoutname"
           />
         </Form.Group>
-        <h3>Search exercises</h3>
+        <h4 style={{ fontWeight: 300 }}>Search exercises</h4>
         <Form.Group className="formSearch" controlId="formSearch">
           <Form.Group className="searchOption" controlId="formSearchText">
             <Form.Label>By name</Form.Label>
@@ -123,8 +126,18 @@ export default function Creator() {
             </Form.Control>
           </Form.Group>
         </Form.Group>
-        <Button onClick={(e) => onClickSearch(e)}>Search exercise</Button>
-        {isLoading ? <Loading /> : null}
+        <Button
+          style={{ color: "white" }}
+          variant="warning"
+          onClick={(e) => onClickSearch(e)}
+        >
+          Search exercise
+        </Button>
+        {isLoading ? (
+          <div className="loading_spinner">
+            <Spinner animation="border" variant="warning" />
+          </div>
+        ) : null}
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;
@@ -156,9 +169,18 @@ export default function Creator() {
         </div>
         <div className="buttonParent">
           {addExercises.length && workoutName ? (
-            <Button onClick={(e) => onClickAddWorkout(e)}>Add workout</Button>
+            <Button
+              variant="outline-warning"
+              onClick={(e) => onClickAddWorkout(e)}
+            >
+              Add workout
+            </Button>
           ) : (
-            <Button onClick={(e) => onClickAddWorkout(e)} disabled>
+            <Button
+              variant="outline-warning"
+              onClick={(e) => onClickAddWorkout(e)}
+              disabled
+            >
               Add workout
             </Button>
           )}

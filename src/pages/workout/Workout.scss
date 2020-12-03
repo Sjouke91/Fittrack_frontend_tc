@@ -1,5 +1,13 @@
 .exercisePage {
-  margin-bottom: 80px;
+  margin-bottom: 20px;
+
+  .loading_spinner {
+    // height: 100vh;
+    background-color: rgb(250, 245, 237);
+    display: flex;
+    align-items: flex-start;
+    padding-top: 80px;
+  }
 
   .pullUpList {
     position: fixed;
@@ -40,12 +48,13 @@
   .header {
     display: flex;
     justify-content: center;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(7, 70, 121);
     align-items: center;
     height: 8vh;
     h2 {
-      font-weight: 200;
+      font-weight: 300;
       font-size: 28px;
+      color: white;
     }
   }
 

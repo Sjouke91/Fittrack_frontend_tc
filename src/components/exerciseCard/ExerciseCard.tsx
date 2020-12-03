@@ -44,7 +44,6 @@ export default function ExerciseCard(props: Props) {
           }
           className="deleteButton"
         >
-          {" "}
           <svg
             width="1em"
             height="1em"
@@ -63,36 +62,40 @@ export default function ExerciseCard(props: Props) {
       </div>
       <div className="exerciseInput">
         <input
+          min={0}
           type="number"
           placeholder="reps"
           onChange={(e) => {
             setExState(exerciseId, "reps", parseInt(e.target.value));
           }}
           required
-        ></input>
+        />
         <input
+          min={0}
           type="number"
           placeholder="sets"
           onChange={(e) => {
             setExState(exerciseId, "sets", parseInt(e.target.value));
           }}
-        ></input>
+        />
         <input
+          min={0}
           type="number"
           placeholder="kg"
           onChange={(e) => {
             setExState(exerciseId, "kg", parseInt(e.target.value));
           }}
           required
-        ></input>
+        />
         <input
+          min={0}
           type="number"
           placeholder="rpe"
           onChange={(e) => {
             setExState(exerciseId, "RPE", parseInt(e.target.value));
           }}
           required
-        ></input>
+        />
       </div>
       <div className="buttons"></div>
     </div>

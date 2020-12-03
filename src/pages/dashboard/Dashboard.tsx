@@ -11,6 +11,7 @@ import Switches from "../../components/Switch";
 import Loading from "../../components/loading";
 import { selectToken } from "../../store/user/selectors";
 import { useHistory } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -42,7 +43,11 @@ export default function Dashboard() {
       <div className="header">
         <h2>Your results!</h2>
       </div>
-      {isLoading ? <Loading /> : null}
+      {isLoading ? (
+        <div className="loading_spinner">
+          <Spinner animation="border" variant="warning" />
+        </div>
+      ) : null}
       <div>
         <div className="calendarComp">
           <h5>Calendar</h5>
