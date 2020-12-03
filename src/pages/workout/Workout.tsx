@@ -124,6 +124,7 @@ export default function Workout() {
             <input
               type="number"
               placeholder="seconds"
+              min={0}
               onChange={(e) => {
                 set_duration(parseInt(e.target.value));
               }}
