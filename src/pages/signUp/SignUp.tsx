@@ -12,6 +12,9 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [height, set_height] = useState("");
+  const [weight, set_weight] = useState("");
+  const [gender, set_gender] = useState("");
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -25,7 +28,7 @@ export default function SignUp() {
   function submitForm(event: MouseEvent) {
     event.preventDefault();
 
-    dispatch(signUp(name, email, password));
+    dispatch(signUp(name, email, password, height, weight, gender));
 
     setEmail("");
     setPassword("");
@@ -37,7 +40,7 @@ export default function SignUp() {
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Signup</h1>
         <Form.Group controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Name:</Form.Label>
           <Form.Control
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -47,7 +50,7 @@ export default function SignUp() {
           />
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>E-mail:</Form.Label>
           <Form.Control
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -55,13 +58,10 @@ export default function SignUp() {
             placeholder="Enter email"
             required
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Password:</Form.Label>
           <Form.Control
             value={password}
             onChange={(event) => setPassword(event.target.value)}
@@ -70,11 +70,49 @@ export default function SignUp() {
             required
           />
         </Form.Group>
+        <Form.Group style={{ display: "flex" }} controlId="formBasicDimensions">
+          <div style={{ width: "50%" }}>
+            <Form.Label>Height (in cm):</Form.Label>
+            <Form.Control
+              value={height}
+              onChange={(event) => set_height(event.target.value)}
+              type="text"
+              placeholder="Height"
+              required
+            />
+          </div>
+          <div style={{ width: "50%" }}>
+            <Form.Label>Weight (in kg):</Form.Label>
+            <Form.Control
+              value={weight}
+              onChange={(event) => set_weight(event.target.value)}
+              type="text"
+              placeholder="Weight"
+              required
+            />
+          </div>
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Gender:</Form.Label>
+          <Form.Control
+            onChange={(event) => set_gender(event.target.value)}
+            as="select"
+          >
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Text className="text-muted">
+          Any information collected from our users will not be sold, shared, or
+          rented to others.
+        </Form.Text>
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>
             Sign up
           </Button>
         </Form.Group>
+
         <Link to="/login">Click here to log in</Link>
       </Form>
     </Container>

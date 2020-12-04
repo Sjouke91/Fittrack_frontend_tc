@@ -106,7 +106,6 @@ export default function Workout() {
             })
           )}
         </div>
-
         <div className="buttonParent">
           <Button
             variant="outline-warning"

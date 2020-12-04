@@ -1,0 +1,17 @@
+#inputField {
+  padding-top: 30px;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+
+  margin-bottom: 50px;
+
+  .quoteName {
+    margin-top: -10px;
+
+    align-self: flex-end;
+  }
+}
