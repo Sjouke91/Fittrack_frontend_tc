@@ -41,7 +41,7 @@ export default function SignUp() {
       >
         <div className="quote">
           <h3 className="mt-5 mb-5">
-            "If I can see it and believe it, then i can achieve it."
+            "If I can see it and believe it, then I can achieve it."
           </h3>
           <h5 className="quoteName">~ Arnold Schwarzenegger</h5>
         </div>
