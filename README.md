@@ -63,8 +63,8 @@ Check out my kanban [project board](https://github.com/users/Sjouke91/projects/1
 
 ### Wireframe & database model
 
-<img align="left" alt="DatabaseModel" width="100%" src="./images/Wireframes.jpg" />
-<img align="left" alt="DatabaseModel" width="100%" src="./images/DatabaseModel.jpg" />
+<img align="left" alt="DatabaseModel" width="100%" src="./Images/Wireframes.jpg" />
+<img align="left" alt="DatabaseModel" width="100%" src="./Images/DatabaseModel.jpg" />
 
 <br />
 <br />
