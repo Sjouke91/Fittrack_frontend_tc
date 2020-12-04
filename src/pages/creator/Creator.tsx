@@ -93,7 +93,7 @@ export default function Creator() {
             type="text"
             onChange={(e) => set_workoutName(e.target.value)}
             value={workoutName}
-            placeholder="Enter workoutname"
+            placeholder="Enter workout name"
           />
         </Form.Group>
         <h4 style={{ fontWeight: 300 }}>Search exercises</h4>

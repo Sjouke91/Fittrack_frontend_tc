@@ -41,7 +41,10 @@ export const logOut = (): UserActionTypes => {
 export const signUp = (
   name: string,
   email: string,
-  password: string
+  password: string,
+  height: number | string,
+  weight: number | string,
+  gender: string
 ): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async (dispatch) => {
     dispatch(appLoading());
@@ -50,6 +53,9 @@ export const signUp = (
         name,
         email,
         password,
+        height,
+        weight,
+        gender,
       });
 
       dispatch(loginSuccess(response.data));

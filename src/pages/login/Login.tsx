@@ -1,3 +1,4 @@
+import "./Login.scss";
 import React, { useState, useEffect, MouseEvent } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -32,10 +33,22 @@ export default function SignUp() {
 
   return (
     <Container>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5">Login</h1>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+      <Form
+        id="inputField"
+        as={Col}
+        md={{ span: 6, offset: 3 }}
+        className="mt-5"
+      >
+        <div className="quote">
+          <h3 className="mt-5 mb-5">
+            "If I can see it and believe it, then i can achieve it."
+          </h3>
+          <h5 className="quoteName">~ Arnold Schwarzenegger</h5>
+        </div>
+        <Form.Group className="emailInput" controlId="formBasicEmail">
+          <Form.Label>
+            <h3>Login</h3>
+          </Form.Label>
           <Form.Control
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -45,8 +58,8 @@ export default function SignUp() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="passwordInput" controlId="formBasicPassword">
+          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control
             value={password}
             onChange={(event) => setPassword(event.target.value)}
@@ -56,7 +69,7 @@ export default function SignUp() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="warning" type="submit" onClick={submitForm}>
             Log in
           </Button>
         </Form.Group>
