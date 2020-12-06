@@ -4,6 +4,8 @@ export const GET_WORKOUT_EXERCISES = "GET_WORKOUT_EXERCISES";
 export const SUBMIT_EXERCISE = "SUBMIT_EXERCISE";
 export const GET_ALL_EXERCISES = "GET_ALL_EXERCISES";
 export const EMPTY_SEARCHED_EXERCISES = "EMPTY_SEARCHED_EXERCISES";
+export const ADD_EXERCISES_TO_WORKOUT = "ADD_EXERCISES_TO_WORKOUT";
+export const DELETE_EXERCISE = "DELETE_EXERCISE";
 
 export type Exercise = {
   id: number;
@@ -45,6 +47,16 @@ export interface ExercisesWithWorkout {
   exercise: Exercise;
 }
 
+export type ExerciseWithoutMuscle = {
+  id: number;
+  name: string;
+};
+
+export interface AddExBySearch {
+  workoutId: number;
+  exercise: ExerciseWithoutMuscle;
+}
+
 interface getExercisesBySearchAction {
   type: typeof GET_EXERCISES_BY_SEARCH;
   payload: Exercise[];
@@ -74,13 +86,25 @@ interface getLoggedExercisesOfUser {
   payload: loggedExercise[];
 }
 
+interface addExercisesToWorkout {
+  type: typeof ADD_EXERCISES_TO_WORKOUT;
+  payload: AddExBySearch;
+}
+
+interface deleteExerciseSucces {
+  type: typeof DELETE_EXERCISE;
+  payload: number;
+}
+
 export type ExerciseActionTypes =
   | getLoggedExercisesOfUser
   | getWorkoutExercisesAction
   | submitExerciseAction
   | getExercisesBySearchAction
   | getAllExercisesAction
-  | emptySearch;
+  | emptySearch
+  | addExercisesToWorkout
+  | deleteExerciseSucces;
 
 export interface ExerciseState {
   exercises: {

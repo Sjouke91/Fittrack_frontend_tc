@@ -15,8 +15,12 @@ import {
   GET_USERS_WORKOUTS,
   ADD_USERS_WORKOUTS,
   WorkoutWithUser,
+  AddExBySearch,
 } from "./types";
-import { getWorkoutExercises } from "../exercises/actions";
+import {
+  getWorkoutExercises,
+  addExercisesToWorkout,
+} from "../exercises/actions";
 
 const workoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
   return { type: GET_USERS_WORKOUTS, payload: workoutArray };
@@ -69,7 +73,6 @@ export const createWorkout = (
       }
     );
     const newWorkout = res.data;
-    console.log("this is res", res);
     dispatch(addWorkoutToState(newWorkout));
     dispatch(appDoneLoading());
     dispatch(showMessageWithTimeout("warning", false, "Workout added!", 3000));
@@ -84,7 +87,8 @@ export const createWorkout = (
 // add exercise to workout
 export const editWorkout = (
   workoutId: number,
-  exerciseArray: number[]
+  exerciseName: string,
+  exerciseId: number
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch,
   getState
@@ -93,13 +97,22 @@ export const editWorkout = (
   const token = selectToken(getState());
 
   try {
-    await axios.post(
+    const res = await axios.post(
       `${apiUrl}/workouts/${workoutId}`,
-      { exerciseArray },
+      { exerciseId },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    const response = res.data;
+
+    const exerciseObject: AddExBySearch = {
+      workoutId,
+      exercise: { id: response.exerciseId, name: exerciseName },
+    };
+
+    console.log("this is ex", exerciseObject);
+    dispatch(addExercisesToWorkout(exerciseObject));
     dispatch(appDoneLoading);
     dispatch(
       showMessageWithTimeout("warning", false, "Exercise(s) added!", 3000)
@@ -125,9 +138,14 @@ export const deleteExerciseFromWorkout = (
 
   try {
     const { workoutId, exerciseId } = deleteExercise;
-    await axios.delete(`${apiUrl}/workouts/${workoutId}/${exerciseId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const deletedWorkout = await axios.delete(
+      `${apiUrl}/workouts/${workoutId}/${exerciseId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    console.log("this is deleted", deletedWorkout);
     dispatch(getWorkoutExercises(workoutId));
     dispatch(appDoneLoading());
     dispatch(

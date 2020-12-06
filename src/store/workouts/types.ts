@@ -13,6 +13,16 @@ export interface WorkoutWithUser {
   workout: Workout;
 }
 
+export type ExerciseWithoutMuscle = {
+  id: number;
+  name: string;
+};
+
+export interface AddExBySearch {
+  workoutId: number;
+  exercise: ExerciseWithoutMuscle;
+}
+
 interface workoutToStateAction {
   type: typeof GET_USERS_WORKOUTS;
   payload: Workout[];
