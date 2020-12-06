@@ -9,11 +9,21 @@ import { selectUser, selectToken } from "../user/selectors";
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
-import { WorkoutActionTypes, Workout, GET_USERS_WORKOUTS } from "./types";
+import {
+  WorkoutActionTypes,
+  Workout,
+  GET_USERS_WORKOUTS,
+  ADD_USERS_WORKOUTS,
+  WorkoutWithUser,
+} from "./types";
 import { getWorkoutExercises } from "../exercises/actions";
 
 const workoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
   return { type: GET_USERS_WORKOUTS, payload: workoutArray };
+};
+
+const addWorkoutToState = (workoutArray: Workout[]): WorkoutActionTypes => {
+  return { type: ADD_USERS_WORKOUTS, payload: workoutArray };
 };
 
 //get all workouts of user
@@ -28,8 +38,12 @@ export const getUsersWorkouts = (): ThunkAction<
   try {
     const res = await axios.get(`${apiUrl}/workouts/${user.id}`);
     dispatch(appDoneLoading());
-    const workoutArray: Workout[] = res.data;
-    dispatch(workoutToState(workoutArray));
+    const workoutArray: WorkoutWithUser[] = res.data;
+
+    const cleanWorkoutArray = workoutArray.map((w) => {
+      return w.workout;
+    });
+    dispatch(workoutToState(cleanWorkoutArray));
   } catch (e) {
     console.log("ERROR:", e.message);
   }
@@ -47,13 +61,16 @@ export const createWorkout = (
   const token = selectToken(getState());
 
   try {
-    await axios.post(
+    const res = await axios.post(
       `${apiUrl}/workouts`,
       { workoutName, exerciseArray },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    const newWorkout = res.data;
+    console.log("this is res", res);
+    dispatch(addWorkoutToState(newWorkout));
     dispatch(appDoneLoading());
     dispatch(showMessageWithTimeout("warning", false, "Workout added!", 3000));
   } catch (e) {

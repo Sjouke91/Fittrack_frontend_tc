@@ -1,4 +1,8 @@
-import { WorkoutActionTypes, GET_USERS_WORKOUTS } from "./types";
+import {
+  WorkoutActionTypes,
+  GET_USERS_WORKOUTS,
+  ADD_USERS_WORKOUTS,
+} from "./types";
 
 const initialState = {
   all: [],
@@ -13,10 +17,8 @@ export default (state = initialState, action: WorkoutActionTypes) => {
     // case "DELETE_WORKOUTS":
     //   return { ...state, all: [] };
 
-    // case "ADD_WORKOUT":
-    //     return {
-    //
-    //     };
+    case ADD_USERS_WORKOUTS:
+      return { ...state, all: [...state.all, action.payload] };
 
     // case "UPDATE_WORKOUT":
     //     return {

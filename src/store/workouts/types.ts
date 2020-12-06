@@ -1,4 +1,5 @@
 export const GET_USERS_WORKOUTS = "GET_USERS_WORKOUTS";
+export const ADD_USERS_WORKOUTS = "ADD_USERS_WORKOUTS";
 
 export interface Workout {
   id: number;
@@ -17,8 +18,13 @@ interface workoutToStateAction {
   payload: Workout[];
 }
 
-export type WorkoutActionTypes = workoutToStateAction;
+interface AddworkoutToStateAction {
+  type: typeof ADD_USERS_WORKOUTS;
+  payload: Workout[];
+}
+
+export type WorkoutActionTypes = workoutToStateAction | AddworkoutToStateAction;
 
 export interface WorkoutsState {
-  workouts: { all: WorkoutWithUser[] };
+  workouts: { all: Workout[] };
 }

@@ -24,6 +24,8 @@ export default function Fitness() {
     dispatch(deleteWorkout(workoutId));
   };
 
+  console.log(workouts);
+
   return (
     <div className="workoutPage">
       <div className="header">
