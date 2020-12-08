@@ -19,6 +19,11 @@ type Props = {
   displaySearchSetter: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type NameExercise = {
+  exerciseId: number;
+  exerciseName: string;
+};
+
 export default function SearchExercise(props: Props) {
   const allExercises = useSelector(importSearchedExercises);
   const allMuscleGroups = useSelector(selectMuscleGroups);
@@ -27,7 +32,7 @@ export default function SearchExercise(props: Props) {
   const [searchMuscleGroup, set_searchMuscleGroup] = useState<string | number>(
     ""
   );
-  const [addExercises, set_addExercises] = useState<number[]>([]);
+  const [addExercises, set_addExercises] = useState<NameExercise[]>([]);
   const { workoutId, displaySearchSetter } = props;
   const isLoading = useSelector(selectAppLoading);
 
@@ -59,19 +64,33 @@ export default function SearchExercise(props: Props) {
     set_searchMuscleGroup("");
   };
 
-  const onClickSelect = (e: MouseEvent, exerciseId: number) => {
+  const onClickSelect = (
+    e: MouseEvent,
+    exerciseId: number,
+    exerciseName: string
+  ) => {
     e.preventDefault();
-    if (!addExercises.includes(exerciseId)) {
-      set_addExercises([...addExercises, exerciseId]);
+    const newExercise = { exerciseId, exerciseName };
+
+    const exIdArray = addExercises.map((ex) => ex.exerciseId);
+
+    if (!exIdArray.includes(exerciseId)) {
+      set_addExercises([...addExercises, newExercise]);
       return;
     }
-    const newWorkoutArray = addExercises.filter((eId) => eId !== exerciseId);
+    const newWorkoutArray = addExercises.filter(
+      (ex) => ex.exerciseId !== exerciseId
+    );
     set_addExercises(newWorkoutArray);
   };
 
   const onClickAddExercises = (e: MouseEvent) => {
     e.preventDefault();
-    dispatch(editWorkout(workoutId, addExercises));
+
+    addExercises.map((ex) =>
+      dispatch(editWorkout(workoutId, ex.exerciseName, ex.exerciseId))
+    );
+
     dispatch(emptySearch());
     displaySearchSetter(false);
     set_addExercises([]);
@@ -138,7 +157,11 @@ export default function SearchExercise(props: Props) {
         <div className="exerciseList">
           {allExercises.map((e, i) => {
             const exerciseId = e.id;
-            const exerciseSelected = addExercises.includes(e.id)
+            const exerciseName = e.name;
+
+            const exIdArray = addExercises.map((ex) => ex.exerciseId);
+
+            const exerciseSelected = exIdArray.includes(exerciseId)
               ? "exerciseCardSelected"
               : "exerciseCard";
 
@@ -146,7 +169,7 @@ export default function SearchExercise(props: Props) {
               <button
                 className={exerciseSelected}
                 key={i}
-                onClick={(e) => onClickSelect(e, exerciseId)}
+                onClick={(e) => onClickSelect(e, exerciseId, exerciseName)}
               >
                 {e.name}
               </button>

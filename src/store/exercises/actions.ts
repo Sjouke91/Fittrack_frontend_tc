@@ -12,6 +12,8 @@ import {
   GET_LOGGED_EXERCISES,
   GET_EXERCISES_BY_SEARCH,
   EMPTY_SEARCHED_EXERCISES,
+  DELETE_EXERCISE,
+  ADD_EXERCISES_TO_WORKOUT,
   ExerciseActionTypes,
   ExercisesWithWorkout,
   Exercise,
@@ -21,6 +23,7 @@ import {
 import { Action } from "redux";
 import { RootState } from "../rootReducer";
 import { ThunkAction } from "redux-thunk";
+import { AddExBySearch } from "../workouts/types";
 
 export const getAllExercises = (): ThunkAction<
   void,
@@ -167,3 +170,16 @@ const allExercisesSucces = (exercises: Exercise[]): ExerciseActionTypes => {
 export const emptySearch = (): ExerciseActionTypes => {
   return { type: EMPTY_SEARCHED_EXERCISES };
 };
+
+export const addExercisesToWorkout = (
+  exercises: AddExBySearch
+): ExerciseActionTypes => {
+  return { type: ADD_EXERCISES_TO_WORKOUT, payload: exercises };
+};
+
+// export const deleteExerciseSucces = (
+//   exerciseId: number
+// ): ExerciseActionTypes => {
+//   console.log("got run");
+//   return { type: DELETE_EXERCISE, payload: exerciseId };
+// };
